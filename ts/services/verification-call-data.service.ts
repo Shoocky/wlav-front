@@ -7,7 +7,7 @@ export class VerificationCallDataService {
 				stdoutMsg: 'Verified',
 				stderrMsg: '',
 				errorMsg: '',
-				createdAt: '17.06.2016. 13:23:01',
+				createdAt: '2016-06-17 13:23:01',
 				programSource_id: 1
 			},
 			{ 
@@ -16,7 +16,7 @@ export class VerificationCallDataService {
 				stdoutMsg: 'Verified',
 				stderrMsg: '',
 				errorMsg: '',
-				createdAt: '18.06.2016. 13:23:01',
+				createdAt: '2016-06-18 13:23:01',
 				programSource_id: 2
 			},
 			{
@@ -25,7 +25,7 @@ export class VerificationCallDataService {
 				stdoutMsg: 'Not verified',
 				stderrMsg: 'Segmentation fault',
 				errorMsg: '',
-				createdAt: '19.06.2016. 13:23:01',
+				createdAt: '2016-06-19 13:23:01',
 				programSource_id: 3
 			},
 			{
@@ -34,7 +34,7 @@ export class VerificationCallDataService {
 				stdoutMsg: 'Verified',
 				stderrMsg: '',
 				errorMsg: '',
-				createdAt: '23.06.2016. 13:23:01',
+				createdAt: '2016-06-23 13:23:01',
 				programSource_id: 4
 			},
 		    {
@@ -43,7 +43,7 @@ export class VerificationCallDataService {
 		    	stdoutMsg: 'Not verified',
 		    	stderrMsg: 'Segmentation fault',
 		    	errorMsg: '',
-		    	createdAt: '24.06.2016. 13:23:01',
+		    	createdAt: '2016-06-24 13:23:01',
 		    	programSource_id: 5
 		    },
       		{
@@ -52,7 +52,7 @@ export class VerificationCallDataService {
       			stdoutMsg: 'Verified',
       			stderrMsg: '',
       			errorMsg: '',
-      			createdAt: '24.06.2016. 13:23:01',
+      			createdAt: '2016-06-24 13:23:01',
       			programSource_id: 2
       		},
 			{
@@ -61,7 +61,7 @@ export class VerificationCallDataService {
 				stdoutMsg: 'Not Verified',
 				stderrMs: '',
 				errorMsg: 'Syntax error',
-				createdAt: '24.06.2016. 13:23:01',
+				createdAt: '2016-06-25 13:23:01',
 				programSource_id: 1
 			},
 		];
