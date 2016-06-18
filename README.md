@@ -3,5 +3,5 @@
 install nodejs and npm
 
 run:
-npm start;
+npm start
 
