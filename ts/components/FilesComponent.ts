@@ -3,9 +3,20 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams, R
 import {FileComponent} from './FileComponent';
 import {ResultsComponent} from './ResultsComponent';
 
+//services
+import {UserService} 		 from '../services/user.service';
+import {VerificationCallService} from '../services/verification-call.service';
+import {ProgramSourceService}	  from '../services/program-source.service'; 
+
+
 @Component({
 	selector: 'files',
 	directives: [RouterOutlet],
+	providers: [
+		UserService,
+		VerificationCallService,
+		ProgramSourceService
+	],
 	template:
 	`
 	<div>
