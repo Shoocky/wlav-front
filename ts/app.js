@@ -9,12 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var http_1 = require('@angular/http');
+//backend web-api
 var angular2_in_memory_web_api_1 = require('angular2-in-memory-web-api');
-var in_memory_data_service_1 = require('./services/in-memory-data.service');
+var data_service_1 = require('./services/data.service');
+//angular
 var core_1 = require('@angular/core');
 var http_2 = require('@angular/http');
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var router_deprecated_1 = require('@angular/router-deprecated');
+//componens
 var mrs_1 = require('./components/mrs');
 var HomeComponent_1 = require('./components/HomeComponent');
 var AboutComponent_1 = require('./components/AboutComponent');
@@ -52,6 +55,6 @@ exports.WlavApp = WlavApp;
 platform_browser_dynamic_1.bootstrap(WlavApp, [
     http_2.HTTP_PROVIDERS,
     { provide: http_1.XHRBackend, useClass: angular2_in_memory_web_api_1.InMemoryBackendService },
-    { provide: angular2_in_memory_web_api_1.SEED_DATA, useClass: in_memory_data_service_1.InMemoryDataService }
+    { provide: angular2_in_memory_web_api_1.SEED_DATA, useClass: data_service_1.DataService }
 ]);
 //# sourceMappingURL=app.js.map

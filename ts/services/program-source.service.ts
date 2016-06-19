@@ -16,7 +16,9 @@ export class ProgramSourceService {
 	getProgramSources(): Promise<ProgramSource[]> {
 		return this.http.get(this.programSourceUrl)
 			.toPromise()
-			.then(response => response.json().data)
+			.then(response => {
+				return response.json().data;
+			})
 			.catch(this.handleError);
 	}
 

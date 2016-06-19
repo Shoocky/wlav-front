@@ -6,13 +6,13 @@ import { VerificationCall }		  from '../classes/verification-call';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class VerfificationCallService {
+export class VerificationCallService {
 	private verificationCallUrl = 'app/verification_call';
 
 	constructor(private http: Http) {
 
 	}
-
+	
 	getVerificationCalls(): Promise<VerificationCall[]> {
 		return this.http.get(this.verificationCallUrl)
 			.toPromise()
@@ -76,4 +76,5 @@ export class VerfificationCallService {
 		console.error('An error ocurred', error);
 		return Promise.reject(error.message || error);
 	}
+	
 }
