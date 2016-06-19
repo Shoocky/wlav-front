@@ -29,5 +29,6 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 	{path: '/results',   name:'Results', component: ResultsComponent, useAsDefault: true},
 	{path: '/:id/...',       name:'File',    component: FileComponent}
 ])
-export class FilesComponent {
+export class FilesComponent{
+
 }

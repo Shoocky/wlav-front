@@ -20,10 +20,29 @@ export class VerificationCallService {
 			.catch(this.handleError);
 	}
 
+	getFileVerificationCalls(fileId: number): Promise<VerificationCall[]> {
+		return this.getVerificationCalls()
+				   .then(verificationCalls =>
+				   		   verificationCalls.filter(verificationCall =>
+				   									verificationCall.programSource_id === fileId)
+				   )
+				   .catch(this.handleError);
+	}
+
+	getFileVerificationCallLast(fileId: number): Promise<VerificationCall>{
+		return this.getFileVerificationCalls(fileId).then(
+			verificationCalls =>
+				verificationCalls.reduce(
+					 (prev, curr) => (prev.id > curr.id)? prev : curr
+				)
+		);
+	}
 
 	getVerificationCall(id: number) {
 		return this.getVerificationCalls()
-			.then( verificationCalls => verificationCalls.filter(verificationCall => verificationCall.id === id)[0]);
+			.then( verificationCalls =>
+				   verificationCalls.filter(verificationCall => verificationCall.id === id)[0]
+				   );
 	}
 
 	private post(verificationCall: VerificationCall): Promise<VerificationCall> {

@@ -7,18 +7,13 @@ import {SourceFileComponent} from './SourceFileComponent';
 import {FileResultComponent} from './FileResultComponent';
 
 //services
-import {UserService} 		 from '../services/user.service';
-import {VerificationCallService} from '../services/verification-call.service';
-import {ProgramSourceService}	  from '../services/program-source.service'; 
+import {RouterShareService} from '../services/router-share.service';
+
 
 @Component({
 	selector: 'file',
 	directives: [RouterOutlet],
-	providers: [
-		UserService,
-		VerificationCallService,
-		ProgramSourceService
-	],
+	providers: [RouterShareService]
 	template:
 	`
 	<h3> File number {{ id }} </h3>
@@ -32,9 +27,11 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 ])
 export class FileComponent implements OnInit{
 	id: number;
-	constructor(private routeParams: RouteParams){}
+	constructor(private routeParams: RouteParams,
+				private routerShareService: RouterShareService){}
 
 	ngOnInit(){
 		this.id = +this.routeParams.get('id');
+		this.routerShareService.setId(this.id);
 	}
 }
