@@ -31,11 +31,14 @@ export class VerificationCallService {
 
 	getFileVerificationCallLast(fileId: number): Promise<VerificationCall>{
 		return this.getFileVerificationCalls(fileId).then(
-			verificationCalls =>
-				verificationCalls.reduce(
-					 (prev, curr) => (prev.id > curr.id)? prev : curr
-				)
-		);
+			verificationCalls => {
+				if (verificationCalls.length != 0) {
+					return verificationCalls.reduce(
+						(prev, curr) => (prev.id > curr.id) ? prev : curr
+					);
+				}
+			}
+		);	
 	}
 
 	getVerificationCall(id: number) {

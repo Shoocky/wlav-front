@@ -1,0 +1,25 @@
+     
+<div *ngIf="initDone" >
+    <table class="ui celled table">
+        <tr *ngFor="let file of files">
+            <td>
+                <a class="item" (click)="gotoFile(file.id)">
+                 <i class="file outline icon"></i>
+                  {{ file.name }}
+                </a>
+            </td>
+            <td *ngIf="fileCalls[file.id]"
+                [class.positive]="fileCalls[file.id]['stdoutMsg'] === 'Verified'"
+                [class.error]="fileCalls[file.id]['stdoutMsg'] !== 'Verified'">
+
+                <i *ngIf="fileCalls[file.id]['stdoutMsg'] === 'Verified'" class="green check circle icon"></i>
+                <i *ngIf="fileCalls[file.id]['stdoutMsg'] !== 'Verified'" class="attention icon"></i>
+
+                {{ fileCalls[file.id]['stdoutMsg'] }}
+            </td>
+            <td *ngIf="!fileCalls[file.id]" > not started </td>
+        </tr>
+    </table>
+</div>
+
+    
