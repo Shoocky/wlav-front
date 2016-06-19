@@ -15,7 +15,6 @@ import {RouteParams, RouteRegistry, Router} from '@angular/router-deprecated';
 @Component({
 	selector: 'source-file',
 	templateUrl: 'templates/source-file.component.html'
-	
 })
 export class SourceFileComponent implements OnInit {
 	programSource: ProgramSource;
