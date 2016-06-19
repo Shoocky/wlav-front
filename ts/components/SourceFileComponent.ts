@@ -1,31 +1,45 @@
-import {Component, OnInit} from '@angular/core';
+//components
+import {Component, OnInit, Injector} from '@angular/core';
+
+//classes
 import {ProgramSource } from '../classes/program-source';
+import {VerificationCall} from '../classes/verification-call';
+
+//services
 import {ProgramSourceService} from '../services/program-source.service';
 import {VerificationCallService} from '../services/verification-call.service';
 import {UserService}    from '../services/user.service';
-import {Router} from '@angular/router-deprecated';
+import {RouterShareService} from '../services/router-share.service';
+import {RouteParams, RouteRegistry, Router} from '@angular/router-deprecated';
 
 @Component({
 	selector: 'source-file',
-	template:
-	`
-	<h4> Source file... </h4>
+	templateUrl: 'templates/source-file.component.html'
 	
-	`
 })
 export class SourceFileComponent implements OnInit {
 	programSource: ProgramSource;
-
+	lastVerificationCall: VerificationCall;
+	
 	constructor(private programSourceService: ProgramSourceService,
 				private verificationCallService: VerificationCallService,
-				private userService: UserService){}
+				private userService: UserService,
+				private routerShareService: RouterShareService){
+	}
 
 	ngOnInit(){
-		this.programSourceService.getProgramSource(1).then(source => console.log(source.name));
-		this.verificationCallService.getVerificationCall(1)
-			.then(verification => console.log(verification.stdoutMsg));
-		this.userService.getUser(1)
-			.then(user => console.log(user.firstName));
+		let id = this.routerShareService.getId();
+		
+		console.log(id);
+		this.programSourceService.getProgramSource(id)
+			.then((source) => {
+				console.log(source);
+				this.programSource = source;
+			});
+
+		this.verificationCallService.getFileVerificationCallLast(id)
+			.then(call => this.lastVerificationCall = call);
+
 	}
 	
 }
