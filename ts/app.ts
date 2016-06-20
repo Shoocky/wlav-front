@@ -38,6 +38,7 @@ import {HeroesRoutingComponent } from './components/HeroesRoutingComponent';
 
 ])
 export class WlavApp {
+	constructor(private router: Router){}
 	logout() {
 		console.log("logout...");
 	}
@@ -45,6 +46,7 @@ export class WlavApp {
 
 bootstrap(WlavApp, [
 	HTTP_PROVIDERS,
+	ROUTER_PROVIDERS,
 	{provide: XHRBackend, useClass: InMemoryBackendService },
 	{provide: SEED_DATA, useClass:  DataService}
 ]);

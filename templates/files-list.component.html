@@ -1,4 +1,5 @@
-     
+<div class="filesList">
+
 <div *ngIf="initDone" >
     <table class="ui celled table">
         <tr *ngFor="let file of files">
@@ -24,5 +25,10 @@
         </tr>
     </table>
 </div>
+
+<div [class.active]="!initDone" class="ui large text loader">Loading</div>
+
+</div>
+
 
     

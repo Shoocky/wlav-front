@@ -19,6 +19,7 @@ body, input[text], button {
 a {
   cursor: pointer;
   cursor: hand;
+  outline: 0;
 }
 button {
   font-family: Arial;
@@ -139,4 +140,8 @@ nav a.router-link-active {
 /* everywhere else */
 * { 
   font-family: Arial, Helvetica, sans-serif; 
+}
+
+.filesList{
+  min-height: 200px;
 }

@@ -1,9 +1,14 @@
+ <!--
  <div class="ui teal secondary pointing menu">
-     <a class="active item" [routerLink]="['/Home']"> Home </a>
-     <a class="item" [routerLink]="['/Profile']"> Profile </a>
-     <div class="right menu">
-         <a class="ui item " > Logout </a>
-     </div>
+    <div [class.active]="router.isRouteActive(router.generate(['/Home']))">
+        <a class="item" [routerLink]="['/Home']"> Home </a>
+    </div>
+    <div [class.active]="router.isRouteActive(router.generate(['/Profile']))">
+        <a class="item" [routerLink]="['/Profile']"> Profile </a>
+    </div>
+    <div class="right menu">
+        <a class="ui item " > Logout </a>
+    </div>
  </div>
  <div class="ui grid">
      <div class="three wide column">
@@ -15,8 +20,32 @@
      </div>
      <div class="twelve wide stretched column">
          <div class="ui segment">
-             This is an stretched grid column. This segment will always match the tab height
+             <router-outlet></router-outlet>
          </div>
      </div>
+ </div>
+-->
+ <div class="ui teal secondary pointing menu">
+    <a class="item" [routerLink]="['/Home']"
+      [class.active]="router.isRouteActive(router.generate(['/Home']))">
+       Home 
+    </a>
+    
+    <a class="item" [routerLink]="['/Profile']"
+       [class.active]="router.isRouteActive(router.generate(['/Profile']))">
+       Profile 
+    </a>
+    <a class="active item" [routerLink]="['/Files']"
+       [class.active]="router.isRouteActive(router.generate(['/Files']))">
+       Files
+    </a>
+    <a class="item" [routerLink]="['/About']"
+       [class.active]="router.isRouteActive(router.generate(['/About']))">
+       About
+    </a>
+
+    <div class="right menu">
+        <a class="ui item " > Logout </a>
+    </div>
  </div>
  <router-outlet></router-outlet>

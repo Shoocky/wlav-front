@@ -12,19 +12,14 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 
 @Component({
 	selector: 'files',
-	directives: [RouterOutlet],
+	directives: [RouterOutlet, ROUTER_DIRECTIVES],
 	providers: [
 		UserService,
 		VerificationCallService,
 		ProgramSourceService
 	],
-	template:
-	`
-	<div>
-	<h2> Files </h2>
-	 <router-outlet></router-outlet>
-    </div>
-	`
+	templateUrl: 'templates/files.component.html'
+
 })
 @RouteConfig([
 	{path: '/',   name:'FilesList', component: FilesListComponent, useAsDefault: true},
@@ -32,5 +27,6 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 	{path: '/:id/...',       name:'File',    component: FileComponent}
 ])
 export class FilesComponent{
+	constructor(private router: Router) { }
 
 }

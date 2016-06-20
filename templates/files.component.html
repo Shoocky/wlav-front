@@ -1,0 +1,26 @@
+
+  <div class="ui grid">
+     <div class="three wide column">
+         <div class="ui vertical fluid tabular menu">
+            <a class="item" [routerLink]="['/Files/Results']"
+	            [class.active]="router.isRouteActive(router.generate(['/Files/Results']))">
+ 				Results
+ 			</a>
+            <a class="item" [routerLink]="['/Files']"
+               [class.active]="router.isRouteActive(router.generate(['/Files']))">
+			   Files
+			</a>
+         </div>
+     </div>
+     <div class="twelve wide stretched column">
+         <div class="ui segment">
+             	
+             	<div>
+             	<h2> Files </h2>
+             		<router-outlet></router-outlet>
+                </div>
+             	
+         </div>
+     </div>
+ </div>
+
