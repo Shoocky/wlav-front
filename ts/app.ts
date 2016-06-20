@@ -25,28 +25,7 @@ import {HeroesRoutingComponent } from './components/HeroesRoutingComponent';
 	selector: 'wlav-app',
 	directives: [ROUTER_DIRECTIVES],
 	providers: [ROUTER_PROVIDERS],
-	template:
-	`
-	<div>
-		<nav>
-		<a> Navigation </a>
-		<ul>	
-			<li> <a [routerLink]="['/Home']"> Home </a> </li>
-			<li> <a [routerLink]="['/Files']"> Files </a> </li>
-			<li> <a [routerLink]="['/About']"> About </a> </li>
-			<li> <a [routerLink]="['/HeroesRouter']"> Heroes </a> </li>
-		</ul>
-
-		<ul>
-			<li> <a [routerLink]="['/Profile']"> Profile </a> </li>
-			<li> <button (click)="logout()"> Logout </button> </li>
-		</ul>
-	</nav>
-
-		<router-outlet></router-outlet>
-	</div>
-	 
-	`
+	templateUrl: 'templates/app.component.html'
 })
 @RouteConfig([
 	{path: '/home',        name:'Home',          component: HomeComponent, useAsDefault: true},

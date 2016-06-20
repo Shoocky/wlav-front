@@ -18,6 +18,9 @@
                 {{ fileCalls[file.id]['stdoutMsg'] }}
             </td>
             <td *ngIf="!fileCalls[file.id]" > not started </td>
+            <td>
+                <button (click)="addNewCall(file.id)"><i class="green plus icon"></i></button>
+            </td>
         </tr>
     </table>
 </div>

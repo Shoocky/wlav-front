@@ -5,6 +5,7 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams, R
 //components
 import {SourceFileComponent} from './SourceFileComponent';
 import {FileResultComponent} from './FileResultComponent';
+import {NewVerificationCallComponent} from './NewVerificationCallComponent';
 
 //services
 import {RouterShareService} from '../services/router-share.service';
@@ -23,7 +24,8 @@ import {RouterShareService} from '../services/router-share.service';
 })
 @RouteConfig([
 	{path: '/source',   name:'SourceFile', component: SourceFileComponent, useAsDefault: true},
-	{path: '/results',  name:'FileResult', component: FileResultComponent}
+	{path: '/results',  name:'FileResult', component: FileResultComponent},
+	{path: '/new', name: 'NewVerificationCall', component: NewVerificationCallComponent}
 ])
 export class FileComponent implements OnInit{
 	id: number;

@@ -52,4 +52,9 @@ export class FilesListComponent implements OnInit {
         let link = ['File', { id: fileId }];
         this.router.navigate(link);
     }
+
+    addNewCall(fileId: number){
+        let link = ['File', {id: fileId}, 'NewVerificationCall'];
+        this.router.navigate(link);
+    }
 }

@@ -1,0 +1,22 @@
+ <div class="ui teal secondary pointing menu">
+     <a class="active item" [routerLink]="['/Home']"> Home </a>
+     <a class="item" [routerLink]="['/Profile']"> Profile </a>
+     <div class="right menu">
+         <a class="ui item " > Logout </a>
+     </div>
+ </div>
+ <div class="ui grid">
+     <div class="three wide column">
+         <div class="ui vertical fluid tabular menu">
+             <a class="active item" [routerLink]="['/Files']"> Files </a>
+             <a class="item" [routerLink]="['/About']"> About </a>
+             <a class="item" [routerLink]="['/HeroesRouter']"> Heroes </a>
+         </div>
+     </div>
+     <div class="twelve wide stretched column">
+         <div class="ui segment">
+             This is an stretched grid column. This segment will always match the tab height
+         </div>
+     </div>
+ </div>
+ <router-outlet></router-outlet>
