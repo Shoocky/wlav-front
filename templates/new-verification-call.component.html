@@ -1,9 +1,21 @@
 <h1> New verification call </h1>
-<div class="ui dropdown">
-  <div class="default text">Gender</div>
-  </div>
-<!--
-<ul *ngFor="let flag of flags">
-   <li>{{ flag.name}} {{flag.value}}</li>
-</ul>
--->    
+<sui-accordion class="styled fluid">
+    <sui-accordion-panel [isOpen]="true">
+        <div title>
+            <i class="dropdown icon"></i>
+            First Panel
+        </div>
+        <div content>
+            <p>Add classes to the <code>sui-accordion</code> element to apply styles.</p>
+        </div>
+    </sui-accordion-panel>
+    <sui-accordion-panel>
+        <div title>
+            <i class="dropdown icon"></i>
+            Second Panel
+        </div>
+        <div content>
+            <p>Second panel content.</p>
+        </div>
+    </sui-accordion-panel>
+</sui-accordion>
