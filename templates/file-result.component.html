@@ -1,0 +1,15 @@
+<sui-accordion class="styled fluid">
+    <sui-accordion-panel *ngFor="let call of calls">
+        <div title>
+            <i class="dropdown icon"></i>
+                Status: {{ call.stdoutMsg }}
+                Created at: {{ call.createdAt }}
+        </div>
+        <div content>
+            <p>Flags : {{ call.flags }} </p>
+            <p>Stdout Message: {{ call.stdoutMsg }}</p>
+            <p>Stderr Message: {{ call.stderrMsg }}</p>
+            <p>Error Message: {{ call.errorMsg }}</p>
+        </div>
+    </sui-accordion-panel>
+</sui-accordion>

@@ -1,11 +1,39 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {VerificationCallService} from '../services/verification-call.service';
+import {VerificationCall} from '../classes/verification-call';
+import {ProgramSource} from '../classes/program-source';
+import {ProgramSourceService} from '../services/program-source.service';
+import {DIRECTIVES} from 'ng2-semantic-ui/ng2-semantic-ui';
+
 @Component({
 	selector: 'results',
-	template:
-	`
-	<h3> Results </h3>
-	
-	`
+	directives: [DIRECTIVES],
+	templateUrl: 'templates/results.component.html'
 })
-export class ResultsComponent {
+export class ResultsComponent implements OnInit{
+	calls: VerificationCall[];
+	callFile: Array<ProgramSource> = new Array<ProgramSource>();
+	initDone : boolean = false;
+
+	constructor(private verificationCallService: VerificationCallService,
+				private programSourceService: ProgramSourceService)
+	{
+	}
+
+	ngOnInit() {
+		this.verificationCallService.getVerificationCalls()
+			.then(calls => {
+				this.calls = calls;
+				return Promise.all(calls.map(call => {
+					this.programSourceService
+						.getProgramSource(call.programSource_id)
+						.then(program => {
+							console.log(call.id);
+							this.callFile[call.id] = program;
+							console.log(this.callFile);
+						});
+				}))
+			}).then(results => this.initDone = true);
+
+	}
 }

@@ -5,8 +5,6 @@ import {RouterShareService} from '../services/router-share.service';
 import {RouteParams, RouteRegistry, Router} from '@angular/router-deprecated';
 import {DIRECTIVES} from 'ng2-semantic-ui/ng2-semantic-ui';
 
-declare var jQuery: any;
-
 @Component({
     selector: 'new-verificaion-call',
     directives: [DIRECTIVES],

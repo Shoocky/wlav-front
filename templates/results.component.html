@@ -1,0 +1,20 @@
+<div *ngIf="initDone">
+<sui-accordion class="styled fluid">
+    <sui-accordion-panel *ngFor="let call of calls">
+        <div title>
+            <i class="dropdown icon"></i>
+            Status: {{ call.stdoutMsg }}
+            Created at: {{ call.createdAt }}
+        </div>
+        <div content>
+            <p>Flags : {{ call.flags }} {{call.id}} </p>
+            <p>Stdout Message: {{ call.stdoutMsg }}</p>
+            <p>Stderr Message: {{ call.stderrMsg }}</p>
+            <p>Error Message: {{ call.errorMsg }}</p>
+            <p>Program {{ callFile[1]["name"] | json}}</p>
+
+        </div>
+    </sui-accordion-panel>
+</sui-accordion>
+</div>
+<!--<div [class.active]="!initDone" class="ui large text loader">Loading</div>-->
