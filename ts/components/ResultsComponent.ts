@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
+
 import {VerificationCallService} from '../services/verification-call.service';
 import {VerificationCall} from '../classes/verification-call';
 import {ProgramSource} from '../classes/program-source';
@@ -12,28 +14,34 @@ import {DIRECTIVES} from 'ng2-semantic-ui/ng2-semantic-ui';
 })
 export class ResultsComponent implements OnInit{
 	calls: VerificationCall[];
-	callFile: Array<ProgramSource> = new Array<ProgramSource>();
-	initDone : boolean = false;
+	callFile: ProgramSource[] = [];
+	initDone = false;
 
 	constructor(private verificationCallService: VerificationCallService,
 				private programSourceService: ProgramSourceService)
 	{
 	}
 
+	getProgramSource(id: number): ProgramSource
+	{
+		return this.callFile[id];
+	}
 	ngOnInit() {
 		this.verificationCallService.getVerificationCalls()
 			.then(calls => {
 				this.calls = calls;
 				return Promise.all(calls.map(call => {
-					this.programSourceService
+					console.log(call.id);
+					return this.programSourceService
 						.getProgramSource(call.programSource_id)
 						.then(program => {
 							console.log(call.id);
 							this.callFile[call.id] = program;
 							console.log(this.callFile);
 						});
-				}))
-			}).then(results => this.initDone = true);
+					
+				}));
+			}).then(results => { this.initDone = true; console.log('lalalal' + this.callFile.length);});
 
 	}
 }
