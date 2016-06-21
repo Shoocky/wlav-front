@@ -1,18 +1,41 @@
 <div *ngIf="initDone">
 <sui-accordion class="styled fluid">
     <sui-accordion-panel *ngFor="let call of calls">
-        <div title>
+        <div title >
+            <div class="ui header"
+                 [class.green]="call.stdoutMsg==='Verified'"
+                 [class.red]="call.stdoutMsg!=='Verified'">
             <i class="dropdown icon"></i>
-            Status: {{ call.stdoutMsg }}
-            Created at: {{ call.createdAt }}
+            <span>
+                Status: {{ call.stdoutMsg }}
+                Created at: {{ call.createdAt }}
+                <i *ngIf="call.stdoutMsg==='Verified'" class="green check circle icon"></i>
+                <i *ngIf="call.stdoutMsg!=='Verified'" class="attention icon"></i>
+            </span>
+            </div>
         </div>
-        <div content>
-            <p>Flags : {{ call.flags }} {{call.id}} </p>
-            <p>Stdout Message: {{ call.stdoutMsg }}</p>
-            <p>Stderr Message: {{ call.stderrMsg }}</p>
-            <p>Error Message: {{ call.errorMsg }}</p>
-            <p>Program {{ callFile[1]["name"] | json}}</p>
+        <div content class="ui relaxed divided list teal">
 
+            <div teal class="item">
+                <div class="ui teal header "> Program: </div>
+                <div class="content"> {{ callFile[1]["name"] | json}} </div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Flags: </div>
+                <div class="content"> {{ call.flags }}</div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Stdout Message: </div>
+                <div class="content"> {{ call.stdoutMsg }} </div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Stderr Message: </div>
+                <div class="content"> {{ call.stderrMsg }} </div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Error Message: </div>
+                <div class="content"> {{ call.errorMsg }} </div>
+            </div>
         </div>
     </sui-accordion-panel>
 </sui-accordion>

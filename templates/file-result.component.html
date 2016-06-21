@@ -1,15 +1,36 @@
 <sui-accordion class="styled fluid">
     <sui-accordion-panel *ngFor="let call of calls">
-        <div title>
-            <i class="dropdown icon"></i>
+        <div title >
+            <div class="ui header"
+                 [class.green]="call.stdoutMsg==='Verified'"
+                 [class.red]="call.stdoutMsg!=='Verified'">
+                <i class="dropdown icon"></i>
+            <span>
                 Status: {{ call.stdoutMsg }}
                 Created at: {{ call.createdAt }}
+                <i *ngIf="call.stdoutMsg==='Verified'" class="green check circle icon"></i>
+                <i *ngIf="call.stdoutMsg!=='Verified'" class="attention icon"></i>
+            </span>
+            </div>
         </div>
-        <div content>
-            <p>Flags : {{ call.flags }} </p>
-            <p>Stdout Message: {{ call.stdoutMsg }}</p>
-            <p>Stderr Message: {{ call.stderrMsg }}</p>
-            <p>Error Message: {{ call.errorMsg }}</p>
+        <div content class="ui relaxed divided list teal">
+gi
+            <div teal class="item">
+                <div class="ui teal header "> Flags: </div>
+                <div class="content"> {{ call.flags }}</div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Stdout Message: </div>
+                <div class="content"> {{ call.stdoutMsg }} </div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Stderr Message: </div>
+                <div class="content"> {{ call.stderrMsg }} </div>
+            </div>
+            <div teal class="item">
+                <div class="ui teal header "> Error Message: </div>
+                <div class="content"> {{ call.errorMsg }} </div>
+            </div>
         </div>
     </sui-accordion-panel>
 </sui-accordion>
