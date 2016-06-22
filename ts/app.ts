@@ -10,6 +10,9 @@ import {HTTP_PROVIDERS} from '@angular/http';
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams} from '@angular/router-deprecated';
 
+//services
+import {AUTH_PROVIDERS} from './services/auth.service';
+
 //componens
 import {Mrs} from './components/mrs';
 import {HomeComponent}    from './components/HomeComponent';
@@ -19,11 +22,11 @@ import {ProfileComponent} from './components/ProfileComponent';
 import {FilesComponent} from './components/FilesComponent';
 import {HeroesComponent} from './components/HeroesComponent';
 import {HeroesRoutingComponent } from './components/HeroesRoutingComponent';
-
+import {LoginComponent} from './components/LoginComponent';
 
 @Component({
 	selector: 'wlav-app',
-	directives: [ROUTER_DIRECTIVES],
+	directives: [ROUTER_DIRECTIVES, LoginComponent],
 	providers: [ROUTER_PROVIDERS],
 	templateUrl: 'templates/app.component.html'
 })
@@ -39,14 +42,12 @@ import {HeroesRoutingComponent } from './components/HeroesRoutingComponent';
 ])
 export class WlavApp {
 	constructor(private router: Router){}
-	logout() {
-		console.log("logout...");
-	}
 }
 
 bootstrap(WlavApp, [
 	HTTP_PROVIDERS,
 	ROUTER_PROVIDERS,
+	AUTH_PROVIDERS,
 	{provide: XHRBackend, useClass: InMemoryBackendService },
 	{provide: SEED_DATA, useClass:  DataService}
 ]);

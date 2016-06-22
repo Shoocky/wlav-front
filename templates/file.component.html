@@ -1,6 +1,6 @@
 <h1 *ngIf="programSource">{{programSource.name}}</h1>
 <router-outlet></router-outlet>
 <span>
-	<p (click)="gotoResults(id)">Results</p>
-	<p (click)="gotoSource(id)">Source</p>
+	<a class="item" (click)="gotoResults(id)">Results</a>
+	<a class="item" (click)="gotoSource(id)">Source</a>
 </span>

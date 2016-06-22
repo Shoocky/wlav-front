@@ -3,8 +3,6 @@ import {Component} from '@angular/core';
 	selector: 'home',
 	template:
 	`
-	<h2> Home </h2>
-	
 	`
 })
 export class HomeComponent {
