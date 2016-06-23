@@ -7,7 +7,7 @@ import {FilesListComponent} from './FilesListComponent';
 //services
 import {UserService} 		 from '../services/user.service';
 import {VerificationCallService} from '../services/verification-call.service';
-import {ProgramSourceService}	  from '../services/program-source.service'; 
+import {ProgramSourceService}	  from '../services/program-source.service';
 import {AuthService} from '../services/auth.service';
 
 @Component({

@@ -150,5 +150,12 @@ nav a.router-link-active {
   width:300px;
   height:300px;
   position: absolute;
-  margin: 100px 100px 100px 500px;
+  margin: 100px 100px 100px 550px;
+}
+
+.homeLogin{
+  width:300px;
+  height:300px;
+  position: absolute;
+  margin: 400px 100px 100px 550px;
 }

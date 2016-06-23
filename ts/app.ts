@@ -12,6 +12,8 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams} f
 
 //services
 import {AUTH_PROVIDERS} from './services/auth.service';
+import {AuthService} from './services/auth.service';
+
 
 //componens
 import {Mrs} from './components/mrs';
@@ -34,6 +36,7 @@ import {LoginComponent} from './components/LoginComponent';
 	{path: '/home',        name:'Home',          component: HomeComponent, useAsDefault: true},
 	{path: '/about',       name:'About',         component: AboutComponent},
 	{path: '/profile',     name:'Profile',       component: ProfileComponent},
+	{path: '/login',       name: 'Login',        component: LoginComponent},
 	{path: '/files/...',   name:'Files',         component: FilesComponent},
 	{path: '/mrs',         name:'Mrs',           component: Mrs },
 	{path: '/details/:id', name:'Details',       component: DetailsComponent},
@@ -41,7 +44,14 @@ import {LoginComponent} from './components/LoginComponent';
 
 ])
 export class WlavApp {
-	constructor(private router: Router){}
+	constructor(private router: Router, public authService: AuthService){}
+
+	logout(): boolean {
+		console.log("logout");
+		this.authService.logout();
+		this.router.navigate(['Home']);
+		return false;
+	}
 }
 
 bootstrap(WlavApp, [

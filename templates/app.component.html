@@ -1,30 +1,3 @@
- <!--
- <div class="ui teal secondary pointing menu">
-    <div [class.active]="router.isRouteActive(router.generate(['/Home']))">
-        <a class="item" [routerLink]="['/Home']"> Home </a>
-    </div>
-    <div [class.active]="router.isRouteActive(router.generate(['/Profile']))">
-        <a class="item" [routerLink]="['/Profile']"> Profile </a>
-    </div>
-    <div class="right menu">
-        <a class="ui item " > Logout </a>
-    </div>
- </div>
- <div class="ui grid">
-     <div class="three wide column">
-         <div class="ui vertical fluid tabular menu">
-             <a class="active item" [routerLink]="['/Files']"> Files </a>
-             <a class="item" [routerLink]="['/About']"> About </a>
-             <a class="item" [routerLink]="['/HeroesRouter']"> Heroes </a>
-         </div>
-     </div>
-     <div class="twelve wide stretched column">
-         <div class="ui segment">
-             <router-outlet></router-outlet>
-         </div>
-     </div>
- </div>
--->
  <div class="ui teal secondary pointing menu">
     <a class="item" [routerLink]="['/Home']"
       [class.active]="router.isRouteActive(router.generate(['/Home']))">
@@ -45,11 +18,13 @@
     </a>
 
     <div class="right menu">
-        <a class="ui item " > Logout </a>
+     <div *ngIf="authService.getUser()">
+         Logged in as <b> {{ authService.getUser() }}</b>
+         <a href (click)="logout()">Log out</a>
+         <hr>
+     </div>
     </div>
  </div>
-
- <login></login>
 
  <router-outlet></router-outlet>
 
