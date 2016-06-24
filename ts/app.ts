@@ -11,8 +11,9 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams} from '@angular/router-deprecated';
 
 //services
-import {AUTH_PROVIDERS} from './services/auth.service';
-import {AuthService} from './services/auth.service';
+import {USER_PROVIDERS} from './services/user.service';
+import {UserService} from './services/user.service';
+
 
 
 //componens
@@ -44,11 +45,11 @@ import {LoginComponent} from './components/LoginComponent';
 
 ])
 export class WlavApp {
-	constructor(private router: Router, public authService: AuthService){}
+	constructor(private router: Router,public userService: UserService){}
 
 	logout(): boolean {
 		console.log("logout");
-		this.authService.logout();
+		this.userService.logout();
 		this.router.navigate(['Home']);
 		return false;
 	}
@@ -56,8 +57,8 @@ export class WlavApp {
 
 bootstrap(WlavApp, [
 	HTTP_PROVIDERS,
+	USER_PROVIDERS,
 	ROUTER_PROVIDERS,
-	AUTH_PROVIDERS,
 	{provide: XHRBackend, useClass: InMemoryBackendService },
 	{provide: SEED_DATA, useClass:  DataService}
 ]);

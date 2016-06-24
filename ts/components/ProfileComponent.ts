@@ -1,6 +1,7 @@
 import {Component, ReflectiveInjector} from '@angular/core';
 import { CanActivate} from '@angular/router-deprecated';
-import {AuthService} from '../services/auth.service';
+import {UserService} from '../services/user.service';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 
 @Component({
@@ -13,9 +14,9 @@ import {AuthService} from '../services/auth.service';
 })
 @CanActivate(
 	(nextInstr: any, currInstr: any) => {
-		let injector: any = ReflectiveInjector.resolveAndCreate([AuthService]);
-		let authService: AuthService = injector.get(AuthService);
-		return authService.isLogged();
+		let injector: any = ReflectiveInjector.resolveAndCreate([HTTP_PROVIDERS, UserService]);
+		let userService: UserService = injector.get(UserService);
+		return userService.isLogged();
 })
 export class ProfileComponent {
 }

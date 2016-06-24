@@ -1,7 +1,7 @@
 import { HTTP_PROVIDERS, Headers, Http } from '@angular/http';
 import { XHRBackend } from '@angular/http';
 
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, provide } from '@angular/core';
 import { User}		  from '../classes/user';
 import 'rxjs/add/operator/toPromise';
 
@@ -72,8 +72,36 @@ export class UserService{
 		}
 	}
 
+	login(email: string, password: string) {
+		return this.getUsers()
+			.then(users => users.filter(users => users.email === email && users.password === password )[0]["id"])
+			.then(id => {
+						if(id!== null)
+							localStorage.setItem('id', 'id');
+							return id;
+						}
+			);
+	}
+
+	logout(): any {
+		localStorage.removeItem('id');
+	}
+
+	getLoggedUser(): any {
+		return localStorage.getItem('id');
+	}
+
+	isLogged(): boolean {
+		return this.getLoggedUser()!=null;
+	}
+
 	private handleError(error: any){
 		console.error('An error ocurred', error);
 		return Promise.reject(error.message || error);
 	}
 }
+
+export var USER_PROVIDERS: Array<any> = [
+	provide(UserService, {useClass: UserService})
+];
+

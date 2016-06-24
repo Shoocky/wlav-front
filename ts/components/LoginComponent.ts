@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../services/auth.service';
+import {UserService} from '../services/user.service';
+import {User} from '../classes/user';
 import {Router} from '@angular/router-deprecated';
 
 @Component({
@@ -7,27 +8,30 @@ import {Router} from '@angular/router-deprecated';
     templateUrl: 'templates/login.component.html'
 })
 export class LoginComponent{
-    message: string;
+    message: string = "loading";
+    id: number;
+    done: boolean = false;
 
-    constructor(public authService: AuthService, private router: Router) {
+    constructor(public userService: UserService, private router: Router) {
         this.message = '';
     }
 
-    login(username: string, password: string){
+    login(email: string, password: string){
         this.message = '';
-        if(!this.authService.login(username, password)){
+        /*
+        if(this.userService.login(email, password) === null){
             this.message = 'Incorect credentials';
-            //tslint: disable
             setTimeout(function(){
                 this.message = '';
             }.bind(this), 2500);
-            //tslint enable
         }
-        return false;
+        return false;*/
+        this.userService.login(email, password).then(id => this.id = id).then(result => { this.done = true });
+
     }
 
     logout(): boolean {
-        this.authService.logout();
+        this.userService.logout();
         this.router.navigate(['Home']);
         return false;
     }

@@ -18,8 +18,8 @@
     </a>
 
     <div class="right menu">
-     <div *ngIf="authService.getUser()">
-         Logged in as <b> {{ authService.getUser() }}</b>
+     <div *ngIf="userService.getLoggedUser()">
+         Logged in as <b> {{ userService.getLoggedUser() }}</b>
          <a href (click)="logout()">Log out</a>
          <hr>
      </div>
