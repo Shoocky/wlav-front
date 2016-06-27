@@ -27,5 +27,8 @@ export class HomeComponent {
 		return this.userService.isLoggedIn();
 	}
 
+	getUserName(){
+		return localStorage.getItem('username');
+	}
 
 }
