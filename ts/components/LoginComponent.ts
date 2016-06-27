@@ -3,6 +3,8 @@ import {UserService} from '../services/user.service';
 import {User} from '../classes/user';
 import {Router} from '@angular/router-deprecated';
 
+import {LoginShareService} from '../services/login-share.service';
+
 @Component({
     selector: 'login',
     templateUrl: 'templates/login.component.html'
@@ -10,29 +12,29 @@ import {Router} from '@angular/router-deprecated';
 export class LoginComponent{
     message: string = "loading";
     id: number;
-    done: boolean = false;
+    logged : boolean = false;
 
-    constructor(public userService: UserService, private router: Router) {
+    constructor(public userService: UserService, private router: Router,
+                private loginShareService: LoginShareService) {
         this.message = '';
     }
 
-    login(email: string, password: string){
+    login(email: string, password: string) {
         this.message = '';
-        /*
-        if(this.userService.login(email, password) === null){
-            this.message = 'Incorect credentials';
-            setTimeout(function(){
-                this.message = '';
-            }.bind(this), 2500);
-        }
-        return false;*/
-        this.userService.login(email, password).then(id => this.id = id).then(result => { this.done = true });
+        console.log("login()");
+        this.logged = true;
+        this.userService.login(email, password);
+        this.router.navigate(['/Home']);
 
     }
 
+    getUserName(){
+        return localStorage.getItem('username');
+    }
     logout(): boolean {
         this.userService.logout();
-        this.router.navigate(['Home']);
+        this.logged = false;
+        this.router.navigate(['/Home']);
         return false;
     }
 }

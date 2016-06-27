@@ -16,10 +16,10 @@
        [class.active]="router.isRouteActive(router.generate(['/About']))">
        About
     </a>
-
     <div class="right menu">
-     <div *ngIf="userService.getLoggedUser()">
-         Logged in as <b> {{ userService.getLoggedUser() }}</b>
+
+     <div *ngIf="isLoggedIn()">
+         Logged in as <b> {{ getUserName() }}</b>
          <a href (click)="logout()">Log out</a>
          <hr>
      </div>
@@ -27,4 +27,3 @@
  </div>
 
  <router-outlet></router-outlet>
-

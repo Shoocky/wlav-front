@@ -1,7 +1,7 @@
-
+<div *ngIf="!logged">
 <div *ngIf="done && id === null"> Incorrect credentials}</div>
 <div  class="login ui ">
-<div class="ui middle aligned center aligned grid" *ngIf="!userService.getLoggedUser()">
+<div class="ui middle aligned center aligned grid" >
     <div class="column">
         <h2 class="ui teal image header">
             <div class="content">
@@ -19,7 +19,7 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="text" name="password" placeholder="Password" #password>
+                        <input type="password" name="password" placeholder="Password" #password>
                     </div>
                 </div>
                 <div class="ui fluid large teal submit button" (click)="login(email.value, password.value)">
@@ -30,4 +30,12 @@
         </form>
     </div>
 </div>
+</div>
+</div>
+
+<div *ngIf="logged">
+    Sup {{ getUserName() }}
+    <div class="ui large teal submit button" (click)="logout()">
+        Logout
+    </div>
 </div>

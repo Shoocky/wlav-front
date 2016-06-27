@@ -14,7 +14,6 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 	selector: 'files',
 	directives: [RouterOutlet, ROUTER_DIRECTIVES],
 	providers: [
-		UserService,
 		VerificationCallService,
 		ProgramSourceService,
 	],
