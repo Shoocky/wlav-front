@@ -1,0 +1,92 @@
+<div  class="login ui ">
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui teal image header">
+                <div class="content">
+                    Create your account
+                </div>
+            </h2>
+            <form [ngFormModel]="myForm"
+                  (ngSubmit)="onSubmit(myForm.value)"
+                  class="ui large form">
+                <div class="ui stacked segment">
+                    <div class="field"
+                         [class.error]="!firstName.valid && firstName.touched">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text"
+                                   name="firstname"
+                                   placeholder="Firstname"
+                                   [ngFormControl]="firstName" required>
+                        </div>
+                    </div>
+                    <div class="field"
+                         [class.error]="!lastName.valid && lastName.touched">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text"
+                                   name="lastname"
+                                   placeholder="Lastname"
+                                   [ngFormControl]="lastName" required>
+                        </div>
+                    </div>
+                    <div class="field"
+                         [class.error]="!email.valid && email.touched">
+                        <div class="ui left icon input">
+                            <i class="mail icon"></i>
+                            <input type="text"
+                                   name="email"
+                                   placeholder="Email"
+                                   [ngFormControl]="email" required>
+
+                            <div *ngIf="email.hasError('invalidEmail')"
+                                 class="ui error message">
+                                Email is invalid
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field"
+                         [class.error]="!username.valid && username.touched">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text"
+                                   name="username"
+                                   placeholder="Choose your username"
+                                   [ngFormControl]="username" required>
+                        </div>
+                    </div>
+                    <div class="field"
+                         [class.error]="!password.valid && password.touched">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password"
+                                   name="password"
+                                   placeholder="Choose your password"
+                                   [ngFormControl]="password" required  minlength="8">
+                        </div>
+                    </div>
+                    <div class="field"
+                         [class.error]="!repeatedPassword.valid && repeatedPassword.touched">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password"
+                                   name="repeatedPassword"
+                                   placeholder="Repeat your password"
+                                   ngControl="email"
+                                   [ngFormControl]="repeatedPassword" required  minlength="8">
+                        </div>
+                    </div>
+                    <button type="submit" *ngIf="!myForm.valid" disabled
+                            class="ui fluid large teal submit button">
+                        Register
+                    </button>
+                    <button type="submit" *ngIf="myForm.valid"
+                            class="ui fluid large teal submit button">
+                        Register
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

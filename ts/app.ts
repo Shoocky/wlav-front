@@ -11,8 +11,10 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams} from '@angular/router-deprecated';
 
 //services
-import {AUTH_PROVIDERS} from './services/auth.service';
-import {AuthService} from './services/auth.service';
+import {USER_PROVIDERS} from './services/user.service';
+import {UserService} from './services/user.service';
+import {LoginShareService} from './services/login-share.service';
+
 
 
 //componens
@@ -25,18 +27,20 @@ import {FilesComponent} from './components/FilesComponent';
 import {HeroesComponent} from './components/HeroesComponent';
 import {HeroesRoutingComponent } from './components/HeroesRoutingComponent';
 import {LoginComponent} from './components/LoginComponent';
+import {RegistrationComponent} from './components/RegistrationComponent';
 
 @Component({
 	selector: 'wlav-app',
 	directives: [ROUTER_DIRECTIVES, LoginComponent],
-	providers: [ROUTER_PROVIDERS],
+	providers: [ROUTER_PROVIDERS, UserService, LoginShareService],
 	templateUrl: 'templates/app.component.html'
 })
 @RouteConfig([
 	{path: '/home',        name:'Home',          component: HomeComponent, useAsDefault: true},
 	{path: '/about',       name:'About',         component: AboutComponent},
 	{path: '/profile',     name:'Profile',       component: ProfileComponent},
-	{path: '/login',       name: 'Login',        component: LoginComponent},
+	{path: '/login',       name:'Login',         component: LoginComponent},
+	{path: '/register',    name:'Register',      component: RegistrationComponent},
 	{path: '/files/...',   name:'Files',         component: FilesComponent},
 	{path: '/mrs',         name:'Mrs',           component: Mrs },
 	{path: '/details/:id', name:'Details',       component: DetailsComponent},
@@ -44,20 +48,31 @@ import {LoginComponent} from './components/LoginComponent';
 
 ])
 export class WlavApp {
-	constructor(private router: Router, public authService: AuthService){}
+	constructor(private router: Router,
+				private userService: UserService,
+				private loginShareService: LoginShareService)
+	{}
+
+	isLoggedIn(){
+		return this.userService.isLoggedIn();
+	}
 
 	logout(): boolean {
 		console.log("logout");
-		this.authService.logout();
+		this.userService.logout();
 		this.router.navigate(['Home']);
 		return false;
+	}
+
+	getUserName(){
+		return localStorage.getItem('username');
 	}
 }
 
 bootstrap(WlavApp, [
 	HTTP_PROVIDERS,
+	UserService,
 	ROUTER_PROVIDERS,
-	AUTH_PROVIDERS,
 	{provide: XHRBackend, useClass: InMemoryBackendService },
 	{provide: SEED_DATA, useClass:  DataService}
 ]);

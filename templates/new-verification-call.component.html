@@ -1,4 +1,9 @@
 <h1> New verification call </h1>
+<button class="ui large teal button"
+        [class.disabled]="chosenFlags.length == 0">
+        Start verification
+</button>
+
 <div>
 	<div *ngFor="let flag of chosenFlags" class="ui red tag label">
 		{{flag.name}}: {{flag.value}}
@@ -39,5 +44,9 @@
     		{{selectedFlag.value}}
     </div>
     </div>
-    <button class="ui teal button" (click)="addFlag()">Add flag</button>
+    <button class="ui red button" (click)="addFlag()">Add flag</button>
 </div>
+
+
+
+

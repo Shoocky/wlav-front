@@ -1,34 +1,40 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../services/auth.service';
+import {UserService} from '../services/user.service';
+import {User} from '../classes/user';
 import {Router} from '@angular/router-deprecated';
+
+import {LoginShareService} from '../services/login-share.service';
 
 @Component({
     selector: 'login',
     templateUrl: 'templates/login.component.html'
 })
 export class LoginComponent{
-    message: string;
+    message: string = "loading";
+    id: number;
+    logged : boolean = false;
 
-    constructor(public authService: AuthService, private router: Router) {
+    constructor(public userService: UserService, private router: Router,
+                private loginShareService: LoginShareService) {
         this.message = '';
     }
 
-    login(username: string, password: string){
+    login(email: string, password: string) {
         this.message = '';
-        if(!this.authService.login(username, password)){
-            this.message = 'Incorect credentials';
-            //tslint: disable
-            setTimeout(function(){
-                this.message = '';
-            }.bind(this), 2500);
-            //tslint enable
-        }
-        return false;
+        console.log("login()");
+        this.logged = true;
+        this.userService.login(email, password);
+        this.router.navigate(['/Home']);
+
     }
 
+    getUserName(){
+        return localStorage.getItem('username');
+    }
     logout(): boolean {
-        this.authService.logout();
-        this.router.navigate(['Home']);
+        this.userService.logout();
+        this.logged = false;
+        this.router.navigate(['/Home']);
         return false;
     }
 }

@@ -5,7 +5,7 @@ export class UserDataService {
 			id: 1,
 			email: 'pera@gmail.com',
 			username: 'pera',
-			password: 'pera',
+			password: 'pera1234',
 			lastName: 'Peric',
 			firstName: 'Perica'
 		},
@@ -13,7 +13,7 @@ export class UserDataService {
 			id: 2,
 			email: 'zdera@gmail.com',
 			username: 'zdera',
-			password: 'zdera',
+			password: 'zdera1234',
 			lastName: 'Zderic',
 			firstName: 'Zderica'
 		},
@@ -21,7 +21,7 @@ export class UserDataService {
 			id: 3,
 			email: 'cera@gmail.com',
 			username: 'cera',
-			password: 'cera',
+			password: 'cera1234',
 			lastName: 'Ceric',
 			firstName: 'Cerica'
 		},
@@ -29,7 +29,7 @@ export class UserDataService {
 			id: 4,
 			email: 'lusa@gmail.com',
 			username: 'lusa',
-			password: 'lusa',
+			password: 'lusa1234',
 			lastName: 'Lusic',
 			firstName: 'Lusica'
 		}
