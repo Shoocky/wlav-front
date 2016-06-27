@@ -1,5 +1,6 @@
 //components
 import {Component, OnInit, Injector} from '@angular/core';
+import {EditorComponent} from './editor.component';
 
 //classes
 import {ProgramSource } from '../classes/program-source';
@@ -14,6 +15,7 @@ import {RouteParams, RouteRegistry, Router} from '@angular/router-deprecated';
 
 @Component({
 	selector: 'source-file',
+	directives: [EditorComponent],
 	templateUrl: 'templates/source-file.component.html'
 })
 export class SourceFileComponent implements OnInit {

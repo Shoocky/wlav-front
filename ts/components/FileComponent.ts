@@ -55,4 +55,8 @@ export class FileComponent implements OnInit{
 		let link = ['File', {id: fileId}, 'FileResult'];
 		this.router.navigate(link);
 	}
+	gotoNewVerification(fileId: number){
+		let link = ['File', {id: fileId}, 'NewVerificationCall'];
+		this.router.navigate(link);
+	}
 }

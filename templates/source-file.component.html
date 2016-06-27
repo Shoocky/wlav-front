@@ -1,29 +1,41 @@
 
-<h4> Source file... </h4>
-<div *ngIf="programSource && lastVerificationCall">
-	<div>
-		<label> file name: {{ programSource.name }} </label>
-	</div>
-	<div>
-		<label> status: {{ lastVerificationCall.stdoutMsg }}</label>
-		
-		<div>
-			<div *ngIf="lastVerificationCall.stdoutMsg === 'Verified'">
-				<i class="green check circle icon huge"></i>
-			</div>
-			<div *ngIf="lastVerificationCall.stdoutMsg !== 'Verified'">
-				<i class="red attention icon huge"></i>
-				<div>
-					Reason: {{ lastVerificationCall.errorMsg }}
-				</div>
-				
+<div *ngIf="programSource">
+	<div class="ui horizontal segments">
+
+		<div class="ui segment">
+			<div class="ui top left attached teal label">{{ programSource.name }}</div>
+			<div padding="0">
+			<editor></editor>
 			</div>
 		</div>
+
+		<div *ngIf="lastVerificationCall" class="ui segment">
+			
+			<div class="ui top attached label"
+				[class.teal]="lastVerificationCall.stdoutMsg==='Verified'"
+				[class.red]="lastVerificationCall.stdoutMsg!=='Verified'"
+			>
+				{{ lastVerificationCall.stdoutMsg }}
+			</div>
+			
+			<div>
+				<div *ngIf="lastVerificationCall.stdoutMsg === 'Verified'">
+					<i class="teal check circle icon huge"></i>
+				</div>
+				<div *ngIf="lastVerificationCall.stdoutMsg !== 'Verified'">
+					<i class="red attention icon huge"></i>
+					<div>
+						{{ lastVerificationCall.errorMsg }}
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
 	</div>
-	
+
 </div>
 
 <div *ngIf="!(programSource || lastVerificationCall)">
 	loading....
 </div>
-

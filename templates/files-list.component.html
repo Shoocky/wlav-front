@@ -1,7 +1,14 @@
 <div class="filesList">
 
 <div *ngIf="initDone" >
-    <table class="ui celled table">
+    <table class="ui teal table">
+        <thead>
+        <tr>
+            <th>File name</th>
+            <th colspan="2">Last verification call</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr *ngFor="let file of files">
             <td>
                 <a class="item" (click)="gotoFile(file.id)">
@@ -12,17 +19,21 @@
             <td *ngIf="fileCalls[file.id]"
                 [class.positive]="fileCalls[file.id]['stdoutMsg'] === 'Verified'"
                 [class.error]="fileCalls[file.id]['stdoutMsg'] !== 'Verified'">
-
-                <i *ngIf="fileCalls[file.id]['stdoutMsg'] === 'Verified'" class="green check circle icon"></i>
-                <i *ngIf="fileCalls[file.id]['stdoutMsg'] !== 'Verified'" class="attention icon"></i>
+                
+                <i *ngIf="fileCalls[file.id]['stdoutMsg'] === 'Verified'" class="teal check circle icon"></i>
+                <i *ngIf="fileCalls[file.id]['stdoutMsg'] !== 'Verified'" class="red attention icon"></i>
 
                 {{ fileCalls[file.id]['stdoutMsg'] }}
+
+                
             </td>
-            <td *ngIf="!fileCalls[file.id]" > not started </td>
-            <td>
-                <button (click)="addNewCall(file.id)"><i class="green plus icon"></i></button>
+            <td *ngIf="!fileCalls[file.id]"> not started </td>
+            <td class="collapsing">
+                <button class="ui labeled icon teal button" (click)="addNewCall(file.id)"><i class="add circle icon"></i> New verification</button>
+
             </td>
         </tr>
+        </tbody>
     </table>
 </div>
 
