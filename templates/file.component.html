@@ -1,6 +1,17 @@
-<h1 *ngIf="programSource">{{programSource.name}}</h1>
+<h1 class="teal" *ngIf="programSource">{{programSource.name}}</h1>
+<div class="ui secondary  menu">
+
+	<a class="item teal" (click)="gotoResults(id)"
+	   [class.active]="router.isRouteActive(router.generate(['FileResult']))">
+		Results
+	</a>
+	<a class="item teal" (click)="gotoSource(id)" 
+	  [class.active]="router.isRouteActive(router.generate(['SourceFile']))">
+		Source
+	</a>
+	<a class="item teal" (click)="gotoNewVerification(id)" 
+	  [class.active]="router.isRouteActive(router.generate(['NewVerificationCall']))">
+		New Verification
+	</a>
+</div>
 <router-outlet></router-outlet>
-<span>
-	<a class="item" (click)="gotoResults(id)">Results</a>
-	<a class="item" (click)="gotoSource(id)">Source</a>
-</span>

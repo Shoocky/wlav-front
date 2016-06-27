@@ -1,21 +1,52 @@
 <h1> New verification call </h1>
-<sui-accordion class="styled fluid">
-    <sui-accordion-panel [isOpen]="true">
-        <div title>
-            <i class="dropdown icon"></i>
-            First Panel
-        </div>
-        <div content>
-            <p>Add classes to the <code>sui-accordion</code> element to apply styles.</p>
-        </div>
-    </sui-accordion-panel>
-    <sui-accordion-panel>
-        <div title>
-            <i class="dropdown icon"></i>
-            Second Panel
-        </div>
-        <div content>
-            <p>Second panel content.</p>
-        </div>
-    </sui-accordion-panel>
-</sui-accordion>
+<button class="ui large teal button"
+        [class.disabled]="chosenFlags.length == 0">
+        Start verification
+</button>
+
+<div>
+	<div *ngFor="let flag of chosenFlags" class="ui red tag label">
+		{{flag.name}}: {{flag.value}}
+		<i class="delete icon" (click)="removeFlag(flag)"></i>
+	</div>
+</div>
+<sui-search placeholder="Flag..." [icon]="true" [options]="options" [searchDelay]="0"
+           (onItemSelected)="alertSelected($event)">
+</sui-search>
+
+<div *ngIf="selectedFlag">
+	
+	<div class="ui red tag label">
+	 {{selectedFlag.name}}: {{selectedFlag.value}}
+
+	</div>
+   	<div class="field">
+
+   	<!-- za brojevne flegove -->
+    <div *ngIf="currentFlagType === 'number'" class="ui input">
+   		   
+    		<input type="number" [(ngModel)]="selectedFlag.value" [min]="selectedFlag.min" [max]="selectedFlag.max"  >
+    		<label> value: ({{selectedFlag.min}}-{{selectedFlag.max}} default: {{selectedFlag.default}})	</label>
+    		{{selectedFlag.value}}
+    </div>
+
+    <!-- za bool flegove -->
+    <div *ngIf="currentFlagType === 'boolean'" class="ui checkbox">
+    	<input type="checkbox" [(ngModel)]="selectedFlag.value">
+    		<label>(default: {{selectedFlag.default}})	</label>
+    		{{selectedFlag.value}}
+    </div>
+
+    <!-- za niske flegove -->
+     <div *ngIf="currentFlagType === 'string'" class="ui input">
+
+    	<input type="text" [(ngModel)]="selectedFlag.value">
+    		{{selectedFlag.value}}
+    </div>
+    </div>
+    <button class="ui red button" (click)="addFlag()">Add flag</button>
+</div>
+
+
+
+

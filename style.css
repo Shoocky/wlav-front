@@ -160,6 +160,7 @@ nav a.router-link-active {
   margin: 280px 100px 100px 525px;
 }
 
+
 .library{
   width:300px;
   height:300px;
@@ -187,4 +188,5 @@ nav a.router-link-active {
   margin: 230px 100px 100px 450px;
   color: #41648a;
   font-family: Lato,"Helvetica Neue",Arial,Helvetica,sans-serif;
+
 }

@@ -3,13 +3,13 @@
     <sui-accordion-panel *ngFor="let call of calls">
         <div title >
             <div class="ui header"
-                 [class.green]="call.stdoutMsg==='Verified'"
+                 [class.teal]="call.stdoutMsg==='Verified'"
                  [class.red]="call.stdoutMsg!=='Verified'">
             <i class="dropdown icon"></i>
             <span>
                 Status: {{ call.stdoutMsg }}
                 Created at: {{ call.createdAt }}
-                <i *ngIf="call.stdoutMsg==='Verified'" class="green check circle icon"></i>
+                <i *ngIf="call.stdoutMsg==='Verified'" class="teal check circle icon"></i>
                 <i *ngIf="call.stdoutMsg!=='Verified'" class="attention icon"></i>
             </span>
             </div>
