@@ -27,7 +27,7 @@ import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
 
 //directives
-import { LoggedInRouterOutlet } from './directives/logged-in-router.directive';
+import { LoggedInRouterOutlet } from './directives/logged-in-router-outlet.directive';
 
 @Component({
 	selector: 'wlav-app',

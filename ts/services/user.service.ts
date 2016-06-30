@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService{
 	private userUrl = 'app/user';
-	
+	logged: boolean = false;
 	constructor(private http: Http){
 
 	}
