@@ -1,14 +1,15 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
+import {Component, ReflectiveInjector} from '@angular/core';
+import {Router, CanActivate} from '@angular/router-deprecated';
 import {UserService} from "../services/user.service";
-import {AUTH_PROVIDERS} from 'angular2-jwt';
-import {Http} from '@angular/http';
+import {AUTH_PROVIDERS, tokenNotExpired} from 'angular2-jwt';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
 
 @Component({
 	selector: 'home',
 	providers: [AUTH_PROVIDERS],
 	templateUrl: 'templates/home.component.html'
 })
+
 export class HomeComponent {
 	jwt: string;
 	decodedJwt: string;

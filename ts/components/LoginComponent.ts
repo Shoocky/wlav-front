@@ -22,7 +22,7 @@ export class LoginComponent{
     }
 
     login(username: string, password: string) {
-        console.log(username, password);
+
         let client_id = '1_4lct27q50a2o0kkgokcc80080soo0w0884o84k4c4084080scc';
         let client_secret='18qczyqg7ccgw44ocw4488k08oscw0ogww08o8wg00wc8w48c4';
         let body= "grant_type=password" +
@@ -31,19 +31,22 @@ export class LoginComponent{
                   "&client_id=" + client_id +
                   "&client_secret=" + client_secret;
 
-        console.log("napravilo body");
-        console.log(body);
-        console.log(encodeURIComponent(body));
         let headers = new Headers();
-        headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
         this.http.post('http://localhost:8000/oauth/v2/token', body , {headers: headers})
         .subscribe(response => {
-                    console.log("uslo u reponse");
+                    
+                    //cuvanje tokena i informacija o koriscnicima 
                     localStorage.setItem('id_token', response.json().access_token);
                     localStorage.setItem('refresh_token', response.json().refresh_token);
                     localStorage.setItem('username', username);
+                    
+                    //postavljanje vremena isteka tokenu
+                    var d = new Date(Date.now());
+                    d.setSeconds(d.getSeconds() + response.json().expires_in);
+                    localStorage.setItem('expires_at', d.toString());
+    
                     this.router.navigate(['/Home']);
                   },
                    error => {

@@ -25,6 +25,7 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 	{path: '/results',   name:'Results', component: ResultsComponent},
 	{path: '/:id/...',       name:'File',    component: FileComponent}
 ])
+/*
 @CanActivate(
 	(nextInstr: any, currInstr: any) => {
 	let injector: any = ReflectiveInjector.resolveAndCreate([HTTP_PROVIDERS, UserService]);
@@ -32,6 +33,7 @@ import {ProgramSourceService}	  from '../services/program-source.service';
 	return userService.isLogged();
 }
 )
+*/
 export class FilesComponent{
 	constructor(private router: Router) { }
 

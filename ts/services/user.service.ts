@@ -8,13 +8,12 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService{
 	private userUrl = 'app/user';
-	logged = false;
+	
 	constructor(private http: Http){
 
 	}
 
 	isLoggedIn(){
-		console.log(localStorage.getItem("username"));
 		return localStorage.getItem("username");
 	}
 	getUsers(): Promise<User[]> {
@@ -28,7 +27,6 @@ export class UserService{
 
 
 	getUser(id: number) : Promise<User> {
-		console.log("getUser");
 		return this.getUsers()
 					.then(users => {
 						console.log("users" + users);
@@ -91,12 +89,10 @@ export class UserService{
 		//this.getUser(1).then(result => console.log("user:" + JSON.stringify(result)));
 		return this.getUsers()
 			.then(users => {
-				console.log("users" + users);
 				var us=users.filter(user => user.email === email && user.password === password);
 				if(us.length == 0 )
 					return null;
 				else {
-					console.log("Uslo da upise usera u local storage");
 					localStorage.setItem('id', JSON.stringify(us[0]['id']));
 					localStorage.setItem('username', us[0]['username']);
 					this.logged = true;
@@ -108,14 +104,13 @@ export class UserService{
 	logout(): any {
 		localStorage.removeItem('id_token');
 		localStorage.removeItem('username');
-		this.logged = false;
+		localStorage.removeItem('expires_at');
 	}
 
 	getLoggedUsername(): Promise<string> {
 		let id_logged:number;
 		let username:string;
 		id_logged = +localStorage.getItem('id');
-		console.log("alal");
 		if(id_logged !== 0){
 			return this.getUser(id_logged).then(user => user.username);
 	    }else{
@@ -124,8 +119,15 @@ export class UserService{
 	}
 
 	isLogged(): boolean {
-		console.log('isLogged');
-		return +localStorage.getItem('id_token') !== 0;
+		var expires_at = localStorage.getItem('expires_at');
+		if (!expires_at) return false;
+	
+		var d = new Date(localStorage.getItem('expires_at'));
+		if(new Date(Date.now()) > d){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	getLastId(): number {

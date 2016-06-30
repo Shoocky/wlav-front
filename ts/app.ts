@@ -18,20 +18,20 @@ import {LoginShareService} from './services/login-share.service';
 
 
 //componens
-import {Mrs} from './components/mrs';
-import {HomeComponent}    from './components/HomeComponent';
-import {AboutComponent}   from './components/AboutComponent';
-import {DetailsComponent} from './components/DetailsComponent';
-import {ProfileComponent} from './components/ProfileComponent';
-import {FilesComponent} from './components/FilesComponent';
-import {HeroesComponent} from './components/HeroesComponent';
-import {HeroesRoutingComponent } from './components/HeroesRoutingComponent';
-import {LoginComponent} from './components/LoginComponent';
-import {RegistrationComponent} from './components/RegistrationComponent';
+import { HomeComponent }    from './components/HomeComponent';
+import { AboutComponent }   from './components/AboutComponent';
+import { DetailsComponent } from './components/DetailsComponent';
+import { ProfileComponent } from './components/ProfileComponent';
+import { FilesComponent } from './components/FilesComponent';
+import { LoginComponent } from './components/LoginComponent';
+import { RegistrationComponent } from './components/RegistrationComponent';
+
+//directives
+import { LoggedInRouterOutlet } from './directives/logged-in-router.directive';
 
 @Component({
 	selector: 'wlav-app',
-	directives: [ROUTER_DIRECTIVES, LoginComponent],
+	directives: [ROUTER_DIRECTIVES, LoginComponent, LoggedInRouterOutlet],
 	providers: [ROUTER_PROVIDERS, UserService, LoginShareService],
 	templateUrl: 'templates/app.component.html'
 })
@@ -42,9 +42,8 @@ import {RegistrationComponent} from './components/RegistrationComponent';
 	{path: '/login',       name:'Login',         component: LoginComponent},
 	{path: '/register',    name:'Register',      component: RegistrationComponent},
 	{path: '/files/...',   name:'Files',         component: FilesComponent},
-	{path: '/mrs',         name:'Mrs',           component: Mrs },
 	{path: '/details/:id', name:'Details',       component: DetailsComponent},
-	{path: '/heroes/...',  name:'HeroesRouter',  component: HeroesRoutingComponent}
+
 
 ])
 export class WlavApp {
@@ -58,7 +57,6 @@ export class WlavApp {
 	}
 
 	logout(): boolean {
-		console.log("logout");
 		this.userService.logout();
 		this.router.navigate(['Home']);
 		return false;
