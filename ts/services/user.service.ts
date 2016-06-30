@@ -106,7 +106,7 @@ export class UserService{
 	}
 
 	logout(): any {
-		localStorage.removeItem('id');
+		localStorage.removeItem('id_token');
 		localStorage.removeItem('username');
 		this.logged = false;
 	}
@@ -125,7 +125,7 @@ export class UserService{
 
 	isLogged(): boolean {
 		console.log('isLogged');
-		return +localStorage.getItem('id') !== 0;
+		return +localStorage.getItem('id_token') !== 0;
 	}
 
 	getLastId(): number {

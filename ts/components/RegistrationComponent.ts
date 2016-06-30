@@ -3,6 +3,7 @@ import {UserService} from '../services/user.service';
 import {User} from '../classes/user';
 import {Router} from '@angular/router-deprecated';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, ControlGroup, Control, Validators, AbstractControl} from '@angular/common';
+import {Http, Headers, HTTP_PROVIDERS} from '@angular/http';
 
 function emailValidator(control: Control) : {[s: string]: boolean} {
     if(typeof(control.value)!=='undefined')
@@ -20,6 +21,7 @@ function passwordValidator(control: Control) : {[s: string]: boolean} {
 @Component({
     selector: 'register',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
+    providers: [HTTP_PROVIDERS],
     templateUrl: 'templates/register.component.html'
 })
 export class RegistrationComponent{
@@ -30,8 +32,9 @@ export class RegistrationComponent{
     email : AbstractControl;
     password: AbstractControl;
     repeatedPassword: AbstractControl;
+    passMatch : boolean = false;
 
-    constructor(public userService: UserService, public fb: FormBuilder, public router: Router) {
+    constructor(public userService: UserService, public fb: FormBuilder, public router: Router, private http: Http) {
         this.myForm = fb.group({
             'firstName': ['', Validators.required],
             'lastName': ['', Validators.required],
@@ -50,12 +53,32 @@ export class RegistrationComponent{
     }
 
     onSubmit(form: any) {
-        /*let id = this.userService.getLastId();*/
-        let user = new User(5, form.email, form.username, form.password, form.lastName, form.firstName);
-        this.userService.save(user);
-        console.log('You submitted: ', user.firstName, user.lastName);
-        console.log('Uslo u submit');
-        let link = ['Login'];
-        this.router.navigate(link);
+        if (form.password !== form.repeatedPassword) {
+            this.passMatch = true;
+        }
+        else {
+            let body = "&username=" + form.username +
+                "&password=" + form.password +
+                "&firstName=" + form.firstName +
+                "&lastName=" + form.lastName +
+                "&email=" + form.email;
+            console.log("napravilo body");
+            console.log(body);
+            let headers = new Headers();
+            headers.append('Accept', 'application/json');
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+            this.http.post('http://localhost:8000/register', body, {headers: headers})
+                .subscribe(response => {
+                    console.log(response.json());
+                    let link = ['Login'];
+                    this.router.navigate(link);
+                },
+                    error => {
+                    alert(error.text());
+                    console.log(error.text());
+                }
+            );
+        }
     }
 }

@@ -13,16 +13,16 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="email" placeholder="Email" #email>
+                        <input type="text" id="username" placeholder="Username" #username>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Password" #password>
+                        <input type="password" id="password" placeholder="Password" #password>
                     </div>
                 </div>
-                <div class="ui fluid large teal submit button" (click)="login(email.value, password.value)">
+                <div class="ui fluid large teal submit button" (click)="login(username.value, password.value)">
                     Login
                 </div>
             </div>

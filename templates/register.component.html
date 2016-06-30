@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="field"
-                         [class.error]="!repeatedPassword.valid && repeatedPassword.touched">
+                         [class.error]="!repeatedPassword.valid && repeatedPassword.touched && passMatch">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
                             <input type="password"
@@ -75,6 +75,9 @@
                                    ngControl="email"
                                    [ngFormControl]="repeatedPassword" required  minlength="8">
                         </div>
+                    </div>
+                    <div *ngIf="passMatch">
+                        Password don't match!
                     </div>
                     <button type="submit" *ngIf="!myForm.valid" disabled
                             class="ui fluid large teal submit button">
