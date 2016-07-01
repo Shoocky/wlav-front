@@ -13,7 +13,6 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams} f
 //services
 import {USER_PROVIDERS} from './services/user.service';
 import {UserService} from './services/user.service';
-import {LoginShareService} from './services/login-share.service';
 
 
 
@@ -32,7 +31,7 @@ import { LoggedInRouterOutlet } from './directives/logged-in-router-outlet.direc
 @Component({
 	selector: 'wlav-app',
 	directives: [ROUTER_DIRECTIVES, LoginComponent, LoggedInRouterOutlet],
-	providers: [ROUTER_PROVIDERS, UserService, LoginShareService],
+	providers: [ROUTER_PROVIDERS, UserService],
 	templateUrl: 'templates/app.component.html'
 })
 @RouteConfig([
@@ -48,8 +47,7 @@ import { LoggedInRouterOutlet } from './directives/logged-in-router-outlet.direc
 ])
 export class WlavApp {
 	constructor(private router: Router,
-				private userService: UserService,
-				private loginShareService: LoginShareService)
+				private userService: UserService)
 	{}
 
 	isLoggedIn(){
