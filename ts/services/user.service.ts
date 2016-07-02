@@ -1,13 +1,13 @@
 import { HTTP_PROVIDERS, Headers, Http } from '@angular/http';
-import { XHRBackend } from '@angular/http';
-
 import { Injectable, Inject, provide } from '@angular/core';
 import { User}		  from '../classes/user';
 import 'rxjs/add/operator/toPromise';
+import {contentHeaders} from '../common/headers';
 
 @Injectable()
 export class UserService{
 	private userUrl = 'app/user';
+	private baseUrl = 'http://localhost:8000/api/user'
 	logged: boolean = false;
 	constructor(private http: Http){
 
@@ -16,90 +16,89 @@ export class UserService{
 	isLoggedIn(){
 		return localStorage.getItem("username");
 	}
+
 	getUsers(): Promise<User[]> {
-		return this.http.get(this.userUrl)
+		let headers = contentHeaders;
+		return this.http.get(this.baseUrl , {headers: contentHeaders})
 			.toPromise()
-			.then(response => {
-				return response.json().data;
-			})
-			.catch(this.handleError);
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	 }
 
 
 	getUser(id: number) : Promise<User> {
-		return this.getUsers()
-					.then(users => {
-						console.log("users" + users);
-						var us=users.filter(user=> user.id == id);
-						if(us.length == 0 )
-							return null;
-						else return us[0];
+		let headers = contentHeaders;
+		console.log(localStorage.getItem('user_id'));
+		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id'), {headers: headers})
+					.toPromise()
+					.then(response => { console.log(response.json()); return response.json();})
+					.catch( error => {
+							console.log(error);
 					});
-
 	}
 
-	private post(user: User): Promise<User>{
-		let headers = new Headers({
-			'Content-Type': 'application/json'
-		});
+	post(user: User) : any{
+		let headers = contentHeaders;
+		headers.append('Content-Type', 'app/x-www-form-urlencoded');
 
-		return this.http
-			.post(this.userUrl, JSON.stringify(user), { headers: headers })
-			.toPromise()
-			.then(res => res.json().data)
-			.catch(this.handleError);
+		let body = 	"username=" + user.username+
+					"&firstName=" + user.firstName +
+					"&lastName=" + user.lastName;
+		console.log(body);
+		this.http.post(this.baseUrl + '/' + localStorage.getItem('user_id'), body, {headers: headers})
+			.subscribe(	result => {
+				console.log(result.json());
+				return result.json();
+			},
+				error => {
+				console.log(error);
+			}
+		);
 	}
 
-	private put(user: User){
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
+	put(user: User) : any {
+		let headers = contentHeaders;
+		headers.append('Content-Type', 'app/x-www-form-urlencoded');
 
-		let url = `${this.userUrl}/${user.id}`;
-
-			return this.http
-			.put(url, JSON.stringify(user), { headers: headers })
-			.toPromise()
-			.then(() => user)
-			.catch(this.handleError);
+		let body = 	"username=" + user.username+
+					"&firstName=" + user.firstName +
+					"&lastName=" + user.lastName;
+					console.log(body);
+		this.http.put(this.baseUrl + '/' + localStorage.getItem('user_id'), body, {headers: headers})
+			.subscribe(	result => {
+				console.log(result.json());
+				return result.json();
+			},
+				error => {
+				console.log(error);
+			}
+		);
 	}
 
-	delete(user: User){
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		let url = `${this.userUrl}/${user.id}`;
-
-			return this.http
-			.delete(url, { headers: headers })
-			.toPromise()
-			.catch(this.handleError);
+	delete(user: User): any{
+		let headers = contentHeaders;
+		this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id'), {headers: headers})
+			.subscribe(	result => {
+				console.log(result.json());
+				return result.json();
+			},
+				error => {
+				console.log(error);
+			}
+		);
 	}
 
-	save(user: User){
-		if(user.id){
+	save(firstName: string, lastName: string, email: string, username: string){
+		/*if(user.id){
 			return this.put(user);
 		}
 		else{
 			return this.post(user);
-		}
+		}*/
 	}
 
-	login(email: string, password: string) {
-
-		//this.getUser(1).then(result => console.log("user:" + JSON.stringify(result)));
-		return this.getUsers()
-			.then(users => {
-				var us=users.filter(user => user.email === email && user.password === password);
-				if(us.length == 0 )
-					return null;
-				else {
-					localStorage.setItem('id', JSON.stringify(us[0]['id']));
-					localStorage.setItem('username', us[0]['username']);
-					this.logged = true;
-					return us[0];
-				}
-			});
-	}
 
 	logout(): any {
 		localStorage.removeItem('id_token');
@@ -109,16 +108,6 @@ export class UserService{
 
 	}
 
-	getLoggedUsername(): Promise<string> {
-		let id_logged:number;
-		let username:string;
-		id_logged = +localStorage.getItem('id');
-		if(id_logged !== 0){
-			return this.getUser(id_logged).then(user => user.username);
-	    }else{
-			return Promise.resolve(null);
-		}
-	}
 
 	isLogged(): boolean {
 		var expires_at = localStorage.getItem('expires_at');
@@ -132,12 +121,12 @@ export class UserService{
 		}
 	}
 
-	getLastId(): number {
-
+	getLastId()/*: number*/ {
+/*
 		let all_users;
 		let id;
 		this.getUsers().then(users => all_users = users).then(result => id = all_users[all_users.length -1].id);
-		return id;
+		return id;*/
 	}
 
 	private handleError(error: any){

@@ -1,9 +1,3 @@
-import { XHRBackend} from '@angular/http';
-
-//backend web-api
-import { InMemoryBackendService, SEED_DATA} from 'angular2-in-memory-web-api';
-import { DataService }		from './services/data.service';
-
 //angular
 import {Component, provide} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
@@ -13,8 +7,6 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, RouteConfig, RouteParams} f
 //services
 import {USER_PROVIDERS} from './services/user.service';
 import {UserService} from './services/user.service';
-
-
 
 //componens
 import { HomeComponent }    from './components/HomeComponent';
@@ -68,7 +60,5 @@ export class WlavApp {
 bootstrap(WlavApp, [
 	HTTP_PROVIDERS,
 	UserService,
-	ROUTER_PROVIDERS,
-	{provide: XHRBackend, useClass: InMemoryBackendService },
-	{provide: SEED_DATA, useClass:  DataService}
+	ROUTER_PROVIDERS
 ]);

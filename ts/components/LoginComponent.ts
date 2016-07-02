@@ -40,9 +40,10 @@ export class LoginComponent{
                     //cuvanje tokena i informacija o koriscnicima 
                     localStorage.setItem('id_token', response.json().access_token);
                     localStorage.setItem('refresh_token', response.json().refresh_token);
-                    localStorage.setItem('user_id', response.json().user_id);
+                    localStorage.setItem('user_id', response.json().user.id);
                     localStorage.setItem('username', username);
                     
+                    console.log('LOGIN USER ID' +localStorage.getItem('user_id'));
                     //postavljanje vremena isteka tokenu
                     var d = new Date(Date.now());
                     d.setSeconds(d.getSeconds() + response.json().expires_in);

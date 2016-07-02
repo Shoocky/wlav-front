@@ -1,8 +1,9 @@
 import {Component, ReflectiveInjector, OnInit} from '@angular/core';
 import {CanActivate} from '@angular/router-deprecated';
 import {Http, Headers, HTTP_PROVIDERS} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 
+import {UserService} from '../services/user.service';
+import {User} from '../classes/user';
 
 @Component({
 	selector: 'profile',
@@ -10,24 +11,18 @@ import 'rxjs/add/operator/toPromise';
 	templateUrl: "templates/profile.component.html"
 })
 export class ProfileComponent implements OnInit{
-	user  : any;
+	user  : any = {};
 	done : boolean = false;
 	edit : boolean = false;
 
-	constructor(private http : Http){
+	constructor(private http : Http, private userService: UserService){
 
 	}
 
     ngOnInit() {
-		let headers = new Headers();
-		console.log('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-		headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-		this.http.get('http://localhost:8000/api/user/' + localStorage.getItem('user_id'), {headers: headers})
-			.toPromise()
-			.then(response => {
-				return response.json();
-			})
-			.then( user => { this.user = user; console.log(user); this.done= true;})
+    	console.log('USER ID' + localStorage.getItem('user_id'));
+		this.userService.getUser(localStorage.getItem('user_id'))
+			.then( user => { this.user = user; this.done= true; console.log(user);})
 			.catch( error => {
 					console.log(error);
 			});
@@ -38,22 +33,7 @@ export class ProfileComponent implements OnInit{
 	}
 
 	submit(firstName: string, lastName: string, email: string, username: string) {
-		let headers = new Headers();
-		console.log('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-		headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-		headers.append('Content-Type', 'app/x-www-form-urlencoded');
-		headers.append('Accept', 'app/json');
-		let body = "firsName=" + firstName +
-			       "&lastName=" + lastName +
-			       "&email=" + email +
-				   "&username=" + username;
-		this.http.put('http://localhost:8000/api/user/' + localStorage.getItem('user_id'), body, {headers: headers})
-			.subscribe(	result => {
-							console.log("Account successfully changed!");
-						},
-						error => {
-						console.log(error);
-						}
-					  );
+		let user = new User(firstName, lastName, email, username);
+		return this.userService.put(user);
 	}
 }
