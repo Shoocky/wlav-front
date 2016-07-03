@@ -44,4 +44,7 @@ export class ResultsComponent implements OnInit{
 			}).then(results => { this.initDone = true; console.log('lalalal' + this.callFile.length);});
 
 	}
+	deleteCall(call: VerificationCall){
+		this.verificationCallService.delete(call).then(result => console.log(result));
+	}
 }

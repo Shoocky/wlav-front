@@ -43,4 +43,7 @@ export class SourceFileComponent implements OnInit {
 
 	}
 	
+	deleteProgram() {
+		this.programSourceService.delete(this.programSource).then(result => console.log(JSON.stringify(result)));
+	}
 }
