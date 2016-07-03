@@ -1,7 +1,8 @@
 <div class="filesList">
 
 <div *ngIf="initDone" >
-    <button class="ui button teal" [smDirModal]="{selector: 'my-modal-normal', closable: false}" (click)="resetStatus()"><i class="upload icon"></i>Upload File</button>
+    <button class="ui button teal" [smDirModal]="{selector: 'my-modal-normal', closable: false}" (click)="resetStatus()">
+        Upload File</button>
 
         <sm-modal selector="my-modal-normal" title="Upload program source" class="" icon="code outline icon">
              <input type="file" 
@@ -10,7 +11,11 @@
                     id="file"
                     class = "inputfile">
             
-                <a class="ui teal button" for="file" (click)="startUpload()"> <i class="upload icon"></i> Choose file </a>
+                <label class="ui teal button" for="file"
+                       (click)="startUpload()">
+                    <i class="upload icon"></i>
+                     Choose file
+                </label>
             
 
              <div *ngIf="uploadStatus">

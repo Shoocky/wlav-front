@@ -39,7 +39,7 @@ export class ProgramSourceService {
 		let headers = contentHeaders();
 		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + id, {headers: headers})
 			.toPromise()
-			.then(response => { return response.json();})
+			.then(response => { console.log(response.json()); return response.json();})
 			.catch( error => {
 				console.log(error);
 			});

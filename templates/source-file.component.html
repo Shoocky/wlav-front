@@ -5,24 +5,27 @@
 		<div class="ui segment">
 			<div class="ui top left attached teal label">{{ programSource.name }}</div>
 			<div padding="0">
-			<editor></editor>
+			<editor [source]="programSource.source"></editor>
 			</div>
 		</div>
 
 		<div *ngIf="lastVerificationCall" class="ui segment">
 			
-			<div class="ui top attached label"
-				[class.teal]="lastVerificationCall.stdoutMsg==='Verified'"
-				[class.red]="lastVerificationCall.stdoutMsg!=='Verified'"
-			>
+			<div class="ui top attached gray label"
+				[class.teal]="lastVerificationCall.status === 'verified'"
+				[class.red]="lastVerificationCall.status === 'not verified'"
+				>
+				<div *ngIf="!lastVerificationCall.status">
+					in progress...
+				</div>
 				{{ lastVerificationCall.status }}
 			</div>
 			
 			<div>
-				<div *ngIf="lastVerificationCall.stdoutMsg === 'Verified'">
+				<div *ngIf="lastVerificationCall.status === 'verified'">
 					<i class="teal check circle icon huge"></i>
 				</div>
-				<div *ngIf="lastVerificationCall.stdoutMsg !== 'Verified'">
+				<div *ngIf="lastVerificationCall.status === 'not verified'">
 					<i class="red attention icon huge"></i>
 					<div>
 						{{ lastVerificationCall.errorMsg }}
