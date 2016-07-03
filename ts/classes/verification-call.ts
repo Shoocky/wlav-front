@@ -1,12 +1,14 @@
 
 export class VerificationCall {
 	id: number;
+    programSourceId: number;
 	flags: string;
 	stdoutMsg: string;
 	stderrMsg: string;
 	errorMsg: string;
 	createdAt: string;
-	programSource_id: number;
+	status: string;
+    output: string;
 }
 
 export class Flag{

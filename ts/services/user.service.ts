@@ -6,7 +6,6 @@ import {contentHeaders} from '../common/headers';
 
 @Injectable()
 export class UserService{
-	private userUrl = 'app/user';
 	private baseUrl = 'http://localhost:8000/api/user'
 	logged: boolean = false;
 	constructor(private http: Http){
@@ -18,8 +17,8 @@ export class UserService{
 	}
 
 	getUsers(): Promise<User[]> {
-		let headers = contentHeaders;
-		return this.http.get(this.baseUrl , {headers: contentHeaders})
+		let headers = contentHeaders();
+		return this.http.get(this.baseUrl , {headers: headers})
 			.toPromise()
 			.then(response => { return response.json();})
 			.catch( error => {
@@ -29,7 +28,8 @@ export class UserService{
 
 
 	getUser(id: number) : Promise<User> {
-		let headers = contentHeaders;
+		let headers = contentHeaders();
+		console.log(JSON.stringify(headers));
 		console.log(localStorage.getItem('user_id'));
 		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id'), {headers: headers})
 					.toPromise()
@@ -40,7 +40,7 @@ export class UserService{
 	}
 
 	post(user: User) : any{
-		let headers = contentHeaders;
+		let headers = contentHeaders();
 		headers.append('Content-Type', 'app/x-www-form-urlencoded');
 
 		let body = 	"username=" + user.username+
@@ -59,8 +59,8 @@ export class UserService{
 	}
 
 	put(user: User) : any {
-		let headers = contentHeaders;
-		headers.append('Content-Type', 'app/x-www-form-urlencoded');
+		let headers = contentHeaders();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
 		let body = 	"username=" + user.username+
 					"&firstName=" + user.firstName +
@@ -78,7 +78,7 @@ export class UserService{
 	}
 
 	delete(user: User): any{
-		let headers = contentHeaders;
+		let headers = contentHeaders();
 		this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id'), {headers: headers})
 			.subscribe(	result => {
 				console.log(result.json());
@@ -111,7 +111,7 @@ export class UserService{
 
 	isLogged(): boolean {
 		var expires_at = localStorage.getItem('expires_at');
-		if (!expires_at) return false;
+		if (!expires_at || !localStorage.getItem('id_token')) return false;
 	
 		var d = new Date(localStorage.getItem('expires_at'));
 		if(new Date(Date.now()) > d){

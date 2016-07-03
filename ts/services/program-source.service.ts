@@ -4,34 +4,49 @@ import { XHRBackend } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { ProgramSource }		  from '../classes/program-source';
 import 'rxjs/add/operator/toPromise';
+import {contentHeaders} from '../common/headers';
 
 @Injectable()
 export class ProgramSourceService {
-	private programSourceUrl = 'app/program_source';
+	private baseUrl = 'http://localhost:8000/apiuser'
 
 	constructor(private http: Http) {
 
 	}
 
-	getProgramSources(): Promise<ProgramSource[]> {
-		return this.http.get(this.programSourceUrl)
+	getAllUsersProgramSources(): Promise<ProgramSource[]> {
+		let headers = contentHeaders();
+		return this.http.get('http://localhost:8000/api/programsource', {headers: headers})
 			.toPromise()
-			.then(response => {
-				return response.json().data;
-			})
-			.catch(this.handleError);
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
+	}
+
+	getProgramSources(): Promise<ProgramSource[]> {
+		let headers = contentHeaders();
+		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource', {headers: headers})
+			.toPromise()
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
 
-	getProgramSource(id: number) {
-		return this.getProgramSources()
-			.then( programSources => programSources.filter( programSource => programSource.id === id)[0]);
+	getProgramSource(id: number) : any {
+		let headers = contentHeaders();
+		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + id, {headers: headers})
+			.toPromise()
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
-	// TODO: getProgramSourceForUser
-
-	private post(programSource: ProgramSource): Promise<ProgramSource> {
-		let headers = new Headers({
+	post(programSource: ProgramSource) {
+		/*let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
 
@@ -39,41 +54,40 @@ export class ProgramSourceService {
 			.post(this.programSourceUrl, JSON.stringify(programSource), { headers: headers })
 			.toPromise()
 			.then(res => res.json().data)
-			.catch(this.handleError);
+			.catch(this.handleError);*/
 	}
 
-	private put(programSource: ProgramSource) {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
+	put(name: string, id: number) {
+		let headers = contentHeaders();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		let url = `${this.programSourceUrl}/${programSource.id}`;
+		let body = 'name=' + name;
 
-		return this.http
-			.put(url, JSON.stringify(programSource), { headers: headers })
+		return this.http.put('http://localhost:8000/api/user' + localStorage.getItem('user_id') + '/programsource/' + id, body, {headers: headers})
 			.toPromise()
-			.then(() => programSource)
-			.catch(this.handleError);
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
 	delete(programSource: ProgramSource) {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		let url = `${this.programSourceUrl}/${programSource.id}`;
-
-		return this.http
-			.delete(url, { headers: headers })
+		let headers = contentHeaders();
+		return this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + programSource.id, {headers: headers})
 			.toPromise()
-			.catch(this.handleError);
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
 	save(programSource: ProgramSource) {
-		if (programSource.id) {
+		/*if (programSource.id) {
 			return this.put(programSource);
 		}
 		else {
 			return this.post(programSource);
-		}
+		}*/
 	}
 
 	private handleError(error: any) {

@@ -34,7 +34,7 @@ export class FilesListComponent implements OnInit {
                         if (call) {
                             console.log(call);
                             console.log(this.files);
-                            this.fileCalls[call.programSource_id] = call;
+                            this.fileCalls[call.programSourceId] = call;
                         }
 
                         else {

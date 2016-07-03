@@ -4,29 +4,44 @@ import { XHRBackend } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { VerificationCall }		  from '../classes/verification-call';
 import 'rxjs/add/operator/toPromise';
+import {contentHeaders} from '../common/headers';
 
 @Injectable()
 export class VerificationCallService {
-	private verificationCallUrl = 'app/verification_call';
+	private baseUrl = 'http://localhost:8000/api/user';
 
 	constructor(private http: Http) {
 
 	}
+
+	getAllUsersVerificationCalls() :Promise<VerificationCall[]>{
+		let headers = contentHeaders();
+		return this.http.get('http://localhost:8000/api/verificationcall', {headers: headers})
+			.toPromise()
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
+	}
 	
 	getVerificationCalls(): Promise<VerificationCall[]> {
-		return this.http.get(this.verificationCallUrl)
+		let headers = contentHeaders();
+		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id') + '/verificationcall', {headers: headers})
 			.toPromise()
-			.then(response => response.json().data)
-			.catch(this.handleError);
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
 	getFileVerificationCalls(fileId: number): Promise<VerificationCall[]> {
-		return this.getVerificationCalls()
-				   .then(verificationCalls =>
-				   		   verificationCalls.filter(verificationCall =>
-				   									verificationCall.programSource_id === fileId)
-				   )
-				   .catch(this.handleError);
+		let headers = contentHeaders();
+		return this.http.get(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + fileId + '/verificationcall', {headers: headers})
+			.toPromise()
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
 	getFileVerificationCallLast(fileId: number): Promise<VerificationCall>{
@@ -48,8 +63,8 @@ export class VerificationCallService {
 				   );
 	}
 
-	private post(verificationCall: VerificationCall): Promise<VerificationCall> {
-		let headers = new Headers({
+	private post(verificationCall: VerificationCall)/*: Promise<VerificationCall>*/{
+		/*let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
 
@@ -57,41 +72,27 @@ export class VerificationCallService {
 			.post(this.verificationCallUrl, JSON.stringify(verificationCall), { headers: headers })
 			.toPromise()
 			.then(res => res.json().data)
-			.catch(this.handleError);
+			.catch(this.handleError);*/
 	}
 
-	private put(verificationCall: VerificationCall) {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		let url = `${this.verificationCallUrl}/${verificationCall.id}`;
-
-		return this.http
-			.put(url, JSON.stringify(verificationCall), { headers: headers })
-			.toPromise()
-			.then(() => verificationCall)
-			.catch(this.handleError);
-	}
 
 	delete(verificationCall: VerificationCall) {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		let url = `${this.verificationCallUrl}/${verificationCall.id}`;
-
-		return this.http
-			.delete(url, { headers: headers })
+		let headers = contentHeaders();
+		return this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + verificationCall.programSourceId + '/verificationcall/' + verificationCall.id, {headers: headers})
 			.toPromise()
-			.catch(this.handleError);
+			.then(response => { return response.json();})
+			.catch( error => {
+				console.log(error);
+			});
 	}
 
-	save(verificationCall: VerificationCall) {
+	save(verificationCall: VerificationCall) {/*
 		if (verificationCall.id) {
 			return this.put(verificationCall);
 		}
 		else {
 			return this.post(verificationCall);
-		}
+		}*/
 	}
 
 	private handleError(error: any) {

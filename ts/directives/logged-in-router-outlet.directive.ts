@@ -18,7 +18,7 @@ export class LoggedInRouterOutlet extends RouterOutlet{
 		
 		super(viewContainerRef, loader, _parentRouter, nameAttr);
 		this.router = _parentRouter;
-		this.publicRoutes = ['', 'login', 'signup'];
+		this.publicRoutes = ['', 'login', 'register'];
 	}
 
 	activate(instruction: ComponentInstruction){

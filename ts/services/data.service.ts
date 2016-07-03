@@ -59,7 +59,7 @@ export class DataService {
 			stderrMsg: '',
 			errorMsg: '',
 			createdAt: '2016-06-17 13:23:01',
-			programSource_id: 1
+			programSourceId: 1
 		},
 		{ 
 			id: 2,
@@ -68,7 +68,7 @@ export class DataService {
 			stderrMsg: '',
 			errorMsg: '',
 			createdAt: '2016-06-18 13:23:01',
-			programSource_id: 2
+			programSourceId: 2
 		},
 		{
 			id: 3,
@@ -77,7 +77,7 @@ export class DataService {
 			stderrMsg: 'Segmentation fault',
 			errorMsg: '',
 			createdAt: '2016-06-19 13:23:01',
-			programSource_id: 3
+			programSourceId: 3
 		},
 		{
 			id: 4,
@@ -86,7 +86,7 @@ export class DataService {
 			stderrMsg: '',
 			errorMsg: '',
 			createdAt: '2016-06-23 13:23:01',
-			programSource_id: 4
+			programSourceId: 4
 		},
 	    {
 	    	id: 5,
@@ -95,7 +95,7 @@ export class DataService {
 	    	stderrMsg: 'Segmentation fault',
 	    	errorMsg: '',
 	    	createdAt: '2016-06-24 13:23:01',
-	    	programSource_id: 5
+	    	programSourceId: 5
 	    },
 	     	{
 	     		id: 6,
@@ -104,7 +104,7 @@ export class DataService {
 	     		stderrMsg: '',
 	     		errorMsg: '',
 	     		createdAt: '2016-06-24 13:23:01',
-	     		programSource_id: 2
+	     		programSourceId: 2
 	     	},
 		{
 			id: 7,
@@ -113,7 +113,7 @@ export class DataService {
 			stderrMs: '',
 			errorMsg: 'Syntax error',
 			createdAt: '2016-06-25 13:23:01',
-			programSource_id: 1
+			programSourceId: 1
 		}
 	];
 

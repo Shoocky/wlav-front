@@ -33,7 +33,7 @@ export class ResultsComponent implements OnInit{
 				return Promise.all(calls.map(call => {
 					console.log(call.id);
 					return this.programSourceService
-						.getProgramSource(call.programSource_id)
+						.getProgramSource(call.programSourceId)
 						.then(program => {
 							console.log(call.id);
 							this.callFile[call.id] = program;

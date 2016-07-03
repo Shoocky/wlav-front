@@ -1,9 +1,11 @@
+import {VerificationCall} from './verification-call';
 
 export class ProgramSource {
 	id: number;
-	userId: number;
-	name: string;
+   name: string;
 	createdAt: string;
+   userId: number;
+   verificationCalls: VerificationCall[];
 }
 
 /*
