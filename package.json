@@ -23,7 +23,7 @@
     "angular2-in-memory-web-api": "0.0.11",
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
-    "ng-semantic": "^1.0.26",
+    "ng-semantic": "1.0.26",
     "ng2-file-upload": "^1.0.3",
     "ng2-semantic-ui": "^0.2.3",
     "ng2-uploader": "^0.5.2",
