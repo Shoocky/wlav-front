@@ -18,7 +18,9 @@ export class NewVerificationCallComponent implements OnInit{
     chosenFlags: Flag[] = [];
     options: string[];
     selectedFlag: Flag = null;
-    currentFlagType: string = null
+    currentFlagType: string = null;
+    id : number;
+
     constructor(private verificatonCallService: VerificationCallService,
                 private routerShareService: RouterShareService,
                 private elementRef:ElementRef){
@@ -29,7 +31,7 @@ export class NewVerificationCallComponent implements OnInit{
 
     ngOnInit() {
 
-        let id = this.routerShareService.getId();
+         this.id = this.routerShareService.getId();
 
     }
 
@@ -73,6 +75,14 @@ export class NewVerificationCallComponent implements OnInit{
         this.chosenFlags.splice(index, 1);
         this.possibleFlags.push(new Flag(flag));
         this.options.push(flag.name);
+    }
+
+    startVerification(){
+        console.log(JSON.stringify(this.chosenFlags));
+        let flags = {};
+        this.chosenFlags.forEach( el => flags[el.name] = el.value);
+        console.log(JSON.stringify(flags));
+        /*this.verificatonCallService.post(this.chosenFlags, this.id).then(res => console.log(res));*/
     }
 }
 

@@ -15,7 +15,7 @@
 				[class.teal]="lastVerificationCall.stdoutMsg==='Verified'"
 				[class.red]="lastVerificationCall.stdoutMsg!=='Verified'"
 			>
-				{{ lastVerificationCall.stdoutMsg }}
+				{{ lastVerificationCall.status }}
 			</div>
 			
 			<div>
@@ -29,6 +29,7 @@
 					</div>
 					
 				</div>
+				<button class="ui large teal button" (click) = "deleteProgram()"> Delete </button>
 			</div>
 		</div>
 

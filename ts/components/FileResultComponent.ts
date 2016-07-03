@@ -28,4 +28,8 @@ export class FileResultComponent implements OnInit{
 		this.verificationCallService.getFileVerificationCalls(id)
 			.then(calls => this.calls = calls);
 	}
+
+	deleteCall(call: VerificationCall){
+		this.verificationCallService.delete(call).then(result => console.log(result));
+	}
 }

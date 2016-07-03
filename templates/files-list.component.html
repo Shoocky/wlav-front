@@ -47,13 +47,13 @@
                 </a>
             </td>
             <td *ngIf="fileCalls[file.id]"
-                [class.positive]="fileCalls[file.id]['stdoutMsg'] === 'Verified'"
-                [class.error]="fileCalls[file.id]['stdoutMsg'] !== 'Verified'">
+                [class.positive]="fileCalls[file.id]['status'] === 'Verified'"
+                [class.error]="fileCalls[file.id]['status'] !== 'Verified'">
                 
-                <i *ngIf="fileCalls[file.id]['stdoutMsg'] === 'Verified'" class="teal check circle icon"></i>
-                <i *ngIf="fileCalls[file.id]['stdoutMsg'] !== 'Verified'" class="red attention icon"></i>
+                <i *ngIf="fileCalls[file.id]['status'] === 'Verified'" class="teal check circle icon"></i>
+                <i *ngIf="fileCalls[file.id]['status'] !== 'Verified'" class="red attention icon"></i>
 
-                {{ fileCalls[file.id]['stdoutMsg'] }}
+                {{ fileCalls[file.id]['status'] }}
 
                 
             </td>

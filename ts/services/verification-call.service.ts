@@ -63,16 +63,18 @@ export class VerificationCallService {
 				   );
 	}
 
-	private post(verificationCall: VerificationCall)/*: Promise<VerificationCall>*/{
-		/*let headers = new Headers({
-			'Content-Type': 'application/json'
-		});
+	post(flags: Object, file_id: number) : any {
+		let headers = contentHeaders();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+		let body = "flags=" + JSON.stringify(flags);
 
 		return this.http
-			.post(this.verificationCallUrl, JSON.stringify(verificationCall), { headers: headers })
+			.post(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' 
+			+ file_id + '/verificationcall', body, {headers: headers})
 			.toPromise()
 			.then(res => res.json().data)
-			.catch(this.handleError);*/
+			.catch(this.handleError);
 	}
 
 
