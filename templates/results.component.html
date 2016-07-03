@@ -1,5 +1,5 @@
 <div *ngIf="initDone">
-<sui-accordion class="styled fluid">
+<!--<sui-accordion class="styled fluid">
     <sui-accordion-panel *ngFor="let call of calls">
         <div title >
             <div class="ui header"
@@ -37,6 +37,35 @@
             <button class="ui teal button" (click) = "deleteCall(call)"> Delete </button>
         </div>
     </sui-accordion-panel>
-</sui-accordion>
+</sui-accordion>-->
+<table class="ui pink table">
+    <thead>
+        <tr>
+            <th>Program</th>
+            <th>Status</th>
+            <th>Created at</th>
+            <th>Stdout Message</th>
+            <th>Stderr Message</th>
+            <th>Error Message</th>
+            <th>Flags</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let call of calls">
+            <td>{{ callFile[call.id]["name"] | json}} </td>
+            <td>{{ call.result }} 
+                <i *ngIf="call.stdoutMsg==='verified'" class="teal check circle icon"></i>
+                <i *ngIf="call.stdoutMsg==='not verified'" class="red attention icon"></i>
+            </td>
+            <td>{{ call.createdAt }}</td>
+            <td>{{ call.stdoutMsg }}</td>
+            <td>{{ call.stdoutMsg }}</td>
+            <td>{{ call.errorMsg }} </td>
+            <td>{{ call.flags }}</td>
+            <td><button class="ui pink button" (click) = "deleteCall(call)"> Delete </button></td>
+        </tr>
+    </tbody>
+</table>
 </div>
 <div [class.active]="!initDone" class="ui large text loader">Loading</div>

@@ -1,38 +1,27 @@
-<sui-accordion class="styled fluid">
-    <sui-accordion-panel *ngFor="let call of calls">
-        <div title >
-            <div class="ui header"
-                 [class.teal]="call.stdoutMsg==='Verified'"
-                 [class.red]="call.stdoutMsg!=='Verified'">
-                <i class="dropdown icon"></i>
-            <span>
-                Status: {{ call.result }}
-                Created at: {{ call.createdAt }}
-                <i *ngIf="call.stdoutMsg==='Verified'" class="teal check circle icon"></i>
-                <i *ngIf="call.stdoutMsg!=='Verified'" class="red attention icon"></i>
-            </span>
-            </div>
-        </div>
-        <div content class="ui relaxed divided list teal">
-            <table class="ui teal table">
-                <thead>
-                    <tr><th>Flags</th>
-                        <th>Stdout Message</th>
-                        <th>Stderr Message</th>
-                        <th>Error Message</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ call.flags }}</td>
-                        <td>{{ call.stdoutMsg }}</td>
-                        <td>{{ call.stdoutMsg }}</td>
-                        <td>{{ call.errorMsg }} </td>
-                    </tr>
-                    <tr>    
-                </tbody>
-            </table>
-            <button class="ui teal button" (click) = "deleteCall(call)"> Delete </button>
-        </div>
-    </sui-accordion-panel>
-</sui-accordion>
+<table class="ui pink table">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Created at</th>
+            <th>Stdout Message</th>
+            <th>Stderr Message</th>
+            <th>Error Message</th>
+            <th>Flags</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let call of calls">
+            <td>{{ call.result }} 
+                <i *ngIf="call.stdoutMsg==='verified'" class="teal check circle icon"></i>
+                <i *ngIf="call.stdoutMsg==='not verified'" class="red attention icon"></i>
+            </td>
+            <td>{{ call.createdAt }}</td>
+            <td>{{ call.stdoutMsg }}</td>
+            <td>{{ call.stdoutMsg }}</td>
+            <td>{{ call.errorMsg }} </td>
+            <td>{{ call.flags }}</td>
+            <td><button class="ui pink button" (click) = "deleteCall(call)"> Delete </button></td>
+        </tr>
+    </tbody>
+</table>
