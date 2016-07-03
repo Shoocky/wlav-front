@@ -14,22 +14,24 @@
             </div>
         </div>
         <div content class="ui relaxed divided list teal">
-            <div teal class="item">
-                <div class="ui violet header "> Flags: </div>
-                <div class="content"> {{ call.flags }}</div>
-            </div>
-            <div teal class="item">
-                <div class="ui violet header "> Stdout Message: </div>
-                <div class="content"> {{ call.stdoutMsg }} </div>
-            </div>
-            <div teal class="item">
-                <div class="ui violet header "> Stderr Message: </div>
-                <div class="content"> {{ call.stderrMsg }} </div>
-            </div>
-            <div teal class="item">
-                <div class="ui violet header "> Error Message: </div>
-                <div class="content"> {{ call.errorMsg }} </div>
-            </div>
+            <table class="ui teal table">
+                <thead>
+                    <tr><th>Flags</th>
+                        <th>Stdout Message</th>
+                        <th>Stderr Message</th>
+                        <th>Error Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ call.flags }}</td>
+                        <td>{{ call.stdoutMsg }}</td>
+                        <td>{{ call.stdoutMsg }}</td>
+                        <td>{{ call.errorMsg }} </td>
+                    </tr>
+                    <tr>    
+                </tbody>
+            </table>
             <button class="ui teal button" (click) = "deleteCall(call)"> Delete </button>
         </div>
     </sui-accordion-panel>
