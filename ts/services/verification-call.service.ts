@@ -63,17 +63,23 @@ export class VerificationCallService {
 				   );
 	}
 
-	post(flags: Object, file_id: number) : any {
+	post(flags: any, file_id: number) : any {
 		let headers = contentHeaders();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		let body = "flags=" + JSON.stringify(flags);
+		let flags_arr = {};
+        flags.forEach( el => flags_arr[el.name] = el.value);
+        let flags_body = {flags: flags_arr};
+        console.log(JSON.stringify(flags_body));
+        
+
+		let body = "flags=" + JSON.stringify(flags_body);
 
 		return this.http
 			.post(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' 
 			+ file_id + '/verificationcall', body, {headers: headers})
 			.toPromise()
-			.then(res => res.json().data)
+			.then(res => res.json())
 			.catch(this.handleError);
 	}
 

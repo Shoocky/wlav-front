@@ -1,7 +1,7 @@
 <div class="filesList">
 
 <div *ngIf="initDone" >
-    <button class="ui button teal" [smDirModal]="{selector: 'my-modal-normal', closable: false}" (click)="resetStatus()">Upload File</button>
+    <button class="ui button teal" [smDirModal]="{selector: 'my-modal-normal', closable: false}" (click)="resetStatus()"><i class="upload icon"></i>Upload File</button>
 
         <sm-modal selector="my-modal-normal" title="Upload program source" class="" icon="code outline icon">
              <input type="file" 
@@ -10,7 +10,7 @@
                     id="file"
                     class = "inputfile">
             
-                <label class="ui teal button" for="file" (click)="startUpload()"> Choose file </label>
+                <a class="ui teal button" for="file" (click)="startUpload()"> <i class="upload icon"></i> Choose file </a>
             
 
              <div *ngIf="uploadStatus">
@@ -34,34 +34,50 @@
     <table class="ui teal table">
         <thead>
         <tr>
-            <th>File name</th>
-            <th colspan="2">Last verification call</th>
+            <th colspan="2">File name</th>
+            <th colspan="2" >Last verification call</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let file of files">
-            <td>
+            <td class="collapsing">
                 <a class="item" (click)="gotoFile(file.id)">
                  <i class="file outline icon"></i>
                   {{ file.name }}
                 </a>
+
             </td>
-            <td *ngIf="fileCalls[file.id]"
-                [class.positive]="fileCalls[file.id]['status'] === 'Verified'"
-                [class.error]="fileCalls[file.id]['status'] !== 'Verified'">
+            <td >
                 
-                <i *ngIf="fileCalls[file.id]['status'] === 'Verified'" class="teal check circle icon"></i>
-                <i *ngIf="fileCalls[file.id]['status'] !== 'Verified'" class="red attention icon"></i>
+                <a><i class="trash outline teal large icon" (click)="deleteProgram(file)"></i></a>
+                
+            </td> 
+            <td *ngIf="fileCalls[file.id]"
+                [class.positive]="fileCalls[file.id]['status'] === 'verified'"
+                [class.error]="fileCalls[file.id]['status'] === 'not verified'"
+                >
+                
+                <i *ngIf="fileCalls[file.id]['status'] === 'verified'" class="teal check circle icon"></i>
+                <i *ngIf="fileCalls[file.id]['status'] === 'not verified'" class="red attention icon"></i>
+
+                <div *ngIf="!fileCalls[file.id]['status']">
+                    in progress...
+                </div>
+
 
                 {{ fileCalls[file.id]['status'] }}
 
                 
             </td>
-            <td *ngIf="!fileCalls[file.id]"> not started </td>
+            <td *ngIf="!fileCalls[file.id]" > not started </td>
             <td class="collapsing">
                 <button class="ui labeled icon teal button" (click)="addNewCall(file.id)"><i class="add circle icon"></i> New verification</button>
 
             </td>
+            
+                
+                 
+            
         </tr>
         </tbody>
     </table>

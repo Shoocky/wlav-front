@@ -28,7 +28,7 @@ export class Flag{
 }
 
 
-export const ALL_FLAGS: Flag[] = [
+export let ALL_FLAGS: Flag[] = [
         new Flag({
             name : 'check-assert',
             value: null,

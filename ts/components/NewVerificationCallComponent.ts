@@ -23,7 +23,8 @@ export class NewVerificationCallComponent implements OnInit{
 
     constructor(private verificatonCallService: VerificationCallService,
                 private routerShareService: RouterShareService,
-                private elementRef:ElementRef){
+                private elementRef:ElementRef,
+                public router: Router){
                 this.possibleFlags = ALL_FLAGS;
                 this.options = this.possibleFlags.map(flag => flag.name);
                 
@@ -52,7 +53,6 @@ export class NewVerificationCallComponent implements OnInit{
 
     addFlag(value: any){
         
-        this.selectedFlag.value = value;
         //remove currently added flags from possible flag array
         var index = this.possibleFlags.map(flag => flag.name).indexOf(this.selectedFlag.name);
         console.log("lalla" + index);
@@ -79,10 +79,13 @@ export class NewVerificationCallComponent implements OnInit{
 
     startVerification(){
         console.log(JSON.stringify(this.chosenFlags));
-        let flags = {};
-        this.chosenFlags.forEach( el => flags[el.name] = el.value);
-        console.log(JSON.stringify(flags));
-        /*this.verificatonCallService.post(this.chosenFlags, this.id).then(res => console.log(res));*/
+        this.verificatonCallService.post(this.chosenFlags, this.id)
+            .then(res =>{
+                this.chosenFlags.forEach(flag => this.possibleFlags.push(new Flag(flag)));
+                this.chosenFlags = [];
+                console.log(res);
+                this.router.navigate(['FileResult']);
+         });
     }
 }
 

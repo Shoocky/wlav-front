@@ -71,11 +71,11 @@ export class ProgramSourceService {
 			});
 	}
 
-	delete(programSource: ProgramSource) {
+	delete(id: number) {
 		let headers = contentHeaders();
-		console.log(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + programSource.id);
+		console.log(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + id);
 		console.log(JSON.stringify(headers));
-		return this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + programSource.id, {headers: headers})
+		return this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id') + '/programsource/' + id, {headers: headers})
 			.toPromise()
 			.then(response => { return response.json();})
 			.catch( error => {

@@ -92,4 +92,13 @@ export class FilesListComponent implements OnInit {
         let link = ['File', {id: fileId}, 'NewVerificationCall'];
         this.router.navigate(link);
     }
+
+    deleteProgram(file: ProgramSource){
+        return this.programSourceService
+                .delete(file.id)
+                .then(result => console.log(JSON.stringify(result)))
+                .then(resp => {
+                    this.files.splice(this.files.indexOf(file), 1)
+                });
+    }
 }
