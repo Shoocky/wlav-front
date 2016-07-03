@@ -6,6 +6,13 @@ export class ProgramSource {
 	createdAt: string;
    userId: number;
    verificationCalls: VerificationCall[];
+   constructor(obj: any){
+      this.id = obj.id? obj.id : null;
+      this.name = obj.name? obj.name: null;
+      this.createdAt = obj.createdAt? obj.createdAt: null;
+      this.userId = obj.userId? obj.userId : null;
+      this.verificationCalls = obj.verificationCalls? obj.verificationCall : [];
+   }
 }
 
 /*

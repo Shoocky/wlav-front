@@ -1,14 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ProgramSourceService} from '../services/program-source.service';
 import {ProgramSource} from '../classes/program-source';
 import {VerificationCallService} from '../services/verification-call.service';
 import {VerificationCall} from '../classes/verification-call';
 import { Router }                      from '@angular/router-deprecated';
+import { SEMANTIC_COMPONENTS, SEMANTIC_DIRECTIVES } from "ng-semantic";
+import { UPLOAD_DIRECTIVES } from 'ng2-uploader/ng2-uploader';
+
+const URL = 'http://127.0.0.1:8000/apiuser/' + localStorage.getItem('user_id') +  '/programsource';
 
 
 @Component({
     selector: 'files',
+    directives: [SEMANTIC_DIRECTIVES, SEMANTIC_COMPONENTS,
+                 UPLOAD_DIRECTIVES],
     templateUrl: 'templates/files-list.component.html'
 })
 export class FilesListComponent implements OnInit {
@@ -18,11 +24,40 @@ export class FilesListComponent implements OnInit {
     fileCalls: Array<VerificationCall> = new Array<VerificationCall>();
     initDone = false;
 
+    uploadFile: any;
+    options: Object = { 
+                        url: URL,
+                        authToken: localStorage.getItem('id_token')
+                     };
+
+    uploadStatus = null;                     
     constructor(private programSourceService: ProgramSourceService,
                 private verificationCallService : VerificationCallService,
-                private router: Router)
+                private router: Router,
+                private cd:ChangeDetectorRef)
     {}
 
+
+    startUpload(){ this.uploadStatus = 'uploading';}
+
+    handleUpload(data): void{
+        if(data && data.response){
+            console.log(JSON.stringify(data));
+            if(data.status === 201){
+                this.uploadStatus = "ok";
+                data=JSON.parse(data.response);
+                this.uploadFile = data;
+                this.files.push(new ProgramSource(data));
+                this.cd.detectChanges();
+            }else{
+                this.uploadStatus = "error"
+            }
+            
+        }
+        
+    }
+
+    resetStatus(){ this.uploadStatus=null; }
     ngOnInit() {
 
         this.programSourceService.getProgramSources().then(files => {

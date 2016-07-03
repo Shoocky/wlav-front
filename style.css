@@ -190,3 +190,12 @@ nav a.router-link-active {
   font-family: Lato,"Helvetica Neue",Arial,Helvetica,sans-serif;
 
 }
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}

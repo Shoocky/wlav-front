@@ -10,15 +10,18 @@
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
     'ng-semantic':                'node_modules/ng-semantic',
-    'angular2-jwt':               'node_modules/angular2-jwt/angular2-jwt.js'
+    'angular2-jwt':               'node_modules/angular2-jwt/angular2-jwt.js',
+    'ng2-uploader':               'node_modules/ng2-uploader'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'app.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'ng-semantic':                { defaultExtension: 'js'},
+    'ng-semantic':                { main: 'ng-semantic.js', defaultExtension: 'js' },
+    'ng2-uploader':               { main: 'ng2-uploader.js', defaultExtension: 'js' },
     'angular2-jwt':               { defaultExtension: 'js'}
+
   };
   var ngPackageNames = [
     'common',

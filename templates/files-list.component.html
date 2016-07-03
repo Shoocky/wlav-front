@@ -1,6 +1,36 @@
 <div class="filesList">
 
 <div *ngIf="initDone" >
+    <button class="ui button teal" [smDirModal]="{selector: 'my-modal-normal', closable: false}" (click)="resetStatus()">Upload File</button>
+
+        <sm-modal selector="my-modal-normal" title="Upload program source" class="" icon="code outline icon">
+             <input type="file" 
+                    [ng-file-select]="options"
+                    (onUpload)="handleUpload($event)"
+                    id="file"
+                    class = "inputfile">
+            
+                <label class="ui teal button" for="file" (click)="startUpload()"> Choose file </label>
+            
+
+             <div *ngIf="uploadStatus">
+
+                <div *ngIf="uploadStatus === 'uploading'">
+                    uploading
+                    <div class="ui active  large inline loader">Loading</div>
+                </div>
+                <div *ngIf="uploadStatus === 'ok'">
+                    <i class="icon checkmark teal large"></i>
+                    File uploaded
+                </div>
+                <div *ngIf="uploadStatus === 'error'">
+                    <i class="icon warning red large"></i>
+                    There was an error. Please try again
+                </div>
+
+
+             </div>
+        </sm-modal>
     <table class="ui teal table">
         <thead>
         <tr>
