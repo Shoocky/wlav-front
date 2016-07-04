@@ -1,59 +1,20 @@
-<div *ngIf="done" class="login ui ">
-    <div class="ui middle aligned center aligned grid">
-        <div class="column">
-            <h2 class="ui teal image header">
-                <div class="content">
-                    Profile
-                    <button (click)="editProfile()"><i class="edit icon"></i></button>
-                </div>
-            </h2>
-            <form class="ui large form">
-                <div class="ui stacked segment">
-                  <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text"
-                                   name="firstName"
-                                   value="{{user.firstName}}"
-                                   [readonly]="!edit"
-                                   #firstName>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text"
-                                   name="lastName"
-                                   value="{{user.lastName}}"
-                                   [readonly]="!edit"
-                                   #lastName>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="mail icon"></i>
-                            <input type="text"
-                                   name="email"
-                                   value="{{user.email}}"
-                                   [readonly]="!edit"
-                                    #email>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text"
-                                   name="username"
-                                   value="{{user.username}}"
-                                   [readonly]="!edit"
-                                   #username>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui fluid large teal submit button" (click)="submit(firstName.value, lastName.value, email.value, username.value)">
-                    Save
-                </div>
-            </form>
-        </div>
+<div *ngIf="done" class="container">
+<div  class="ui teal card">
+  <div class="image">
+    <img src="../images/profile.png">
+        <a class="ui teal right ribbon label" (click)="submit()">Edit</a>
+  </div>
+  <div class="content">
+    <h1 class="header ui teal">{{user.firstName}} {{user.lastName}}</h1>
+    <div class="meta">
+       {{user.username}}
     </div>
+  </div>
+  <div class="extra content">
+    <a>
+      <i class="user icon"></i>
+      {{user.email}}
+    </a>
+  </div>
+</div>
 </div>

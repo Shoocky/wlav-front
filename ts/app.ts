@@ -13,9 +13,12 @@ import { HomeComponent }    from './components/HomeComponent';
 import { AboutComponent }   from './components/AboutComponent';
 import { DetailsComponent } from './components/DetailsComponent';
 import { ProfileComponent } from './components/ProfileComponent';
+import { EditProfileComponent } from './components/EditProfileComponent';
 import { FilesComponent } from './components/FilesComponent';
 import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
+import { ChangePasswordComponent } from './components/ChangePasswordComponent';
+
 
 //directives
 import { LoggedInRouterOutlet } from './directives/logged-in-router-outlet.directive';
@@ -27,14 +30,15 @@ import { LoggedInRouterOutlet } from './directives/logged-in-router-outlet.direc
 	templateUrl: 'templates/app.component.html'
 })
 @RouteConfig([
-	{path: '/home',        name:'Home',          component: HomeComponent, useAsDefault: true},
-	{path: '/about',       name:'About',         component: AboutComponent},
-	{path: '/profile',     name:'Profile',       component: ProfileComponent},
-	{path: '/login',       name:'Login',         component: LoginComponent},
-	{path: '/register',    name:'Register',      component: RegistrationComponent},
-	{path: '/files/...',   name:'Files',         component: FilesComponent},
-	{path: '/details/:id', name:'Details',       component: DetailsComponent},
-
+	{path: '/home',           name:'Home',           component: HomeComponent, useAsDefault: true},
+	{path: '/about',          name:'About',          component: AboutComponent},
+	{path: '/profile',        name:'Profile',        component: ProfileComponent},
+	{path: '/editprofile',    name:'EditProfile',    component: EditProfileComponent},
+	{path: '/login',          name:'Login',          component: LoginComponent},
+	{path: '/register',       name:'Register',       component: RegistrationComponent},
+	{path: '/files/...',      name:'Files',          component: FilesComponent},
+	{path: '/details/:id',    name:'Details',        component: DetailsComponent},
+	{path: '/changepassword', name:'ChangePassword', component: ChangePasswordComponent},
 
 ])
 export class WlavApp {

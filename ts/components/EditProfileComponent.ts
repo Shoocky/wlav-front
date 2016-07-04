@@ -8,9 +8,9 @@ import {User} from '../classes/user';
 @Component({
 	selector: 'profile',
 	providers: [HTTP_PROVIDERS],
-	templateUrl: "templates/profile.component.html"
+	templateUrl: "templates/edit-profile.component.html"
 })
-export class ProfileComponent implements OnInit{
+export class EditProfileComponent implements OnInit {
 	user  : any = {};
 	done : boolean = false;
 	edit : boolean = false;
@@ -28,7 +28,14 @@ export class ProfileComponent implements OnInit{
 			});
 	}
 
-	submit() {
-		this.router.navigate(['EditProfile']);
+
+	submit(firstName: string, lastName: string, email: string, username: string) {
+		let user = new User(firstName, lastName, email, username);
+		this.userService.put(user);
+		this.router.navigate(['Profile']);
+	}
+
+	changePassword(){
+		this.router.navigate(['ChangePassword']);
 	}
 }
