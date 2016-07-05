@@ -1,44 +1,6 @@
-<div *ngIf="initDone">
-<!--<sui-accordion class="styled fluid">
-    <sui-accordion-panel *ngFor="let call of calls">
-        <div title >
-            <div class="ui header"
-                 [class.teal]="call.stdoutMsg==='verified'"
-                 [class.red]="call.stdoutMsg!=='verified'">
-            <i class="dropdown icon"></i>
-            <span>
-                Program: {{ callFile[call.id]["name"] | json}} 
-                Status: {{ call.stdoutMsg }}
-                Created at: {{ call.createdAt }}
-                <i *ngIf="call.stdoutMsg==='verified'" class="teal check circle icon"></i>
-                <i *ngIf="call.stdoutMsg!=='verified'" class="attention icon"></i>
-            </span>
-            </div>
-        </div>
-        <div content class="ui relaxed divided list teal">
-            <table class="ui teal table">
-                <thead>
-                    <tr><th>Flags</th>
-                        <th>Stdout Message</th>
-                        <th>Stderr Message</th>
-                        <th>Error Message</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ call.flags }}</td>
-                        <td>{{ call.stdoutMsg }}</td>
-                        <td>{{ call.stdoutMsg }}</td>
-                        <td>{{ call.errorMsg }} </td>
-                    </tr>
-                    <tr>    
-                </tbody>
-            </table>
-            <button class="ui teal button" (click) = "deleteCall(call)"> Delete </button>
-        </div>
-    </sui-accordion-panel>
-</sui-accordion>-->
-<table class="ui pink table">
+<div class="results">
+<div *ngIf="initDone" >
+<table class="ui pink striped table">
     <thead>
         <tr>
             <th>Program</th>
@@ -53,7 +15,14 @@
     </thead>
     <tbody>
         <tr *ngFor="let call of calls">
-            <td>{{ callFile[call.id]["name"] | json}} </td>
+            
+            <td class="collapsing">
+                <a class="item" (click)="gotoFile(file.id)">
+                 <i class="file outline icon"></i>
+                 {{ callFile[call.id]["name"] }}
+                </a>
+
+            </td>
             <td>{{ call.result }} 
                 <i *ngIf="call.stdoutMsg==='verified'" class="teal check circle icon"></i>
                 <i *ngIf="call.stdoutMsg==='not verified'" class="red attention icon"></i>
@@ -63,9 +32,10 @@
             <td>{{ call.stdoutMsg }}</td>
             <td>{{ call.errorMsg }} </td>
             <td>{{ call.flags }}</td>
-            <td><button class="ui pink button" (click) = "deleteCall(call)"> Delete </button></td>
+            <td><button class="ui labeled icon pink button" (click)="deleteCall(call)"><i class="trash outline icon"></i> Delete</button></td>
         </tr>
     </tbody>
 </table>
 </div>
 <div [class.active]="!initDone" class="ui large text loader">Loading</div>
+</div>

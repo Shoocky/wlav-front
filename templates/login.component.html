@@ -1,40 +1,44 @@
-<div *ngIf="!logged">
-<div *ngIf="done && id === null"> Incorrect credentials}</div>
-<div  class="login ui ">
-<div class="ui middle aligned center aligned grid" >
-    <div class="column">
-        <h2 class="ui teal image header">
-            <div class="content">
-                Log-in to your account
-            </div>
-        </h2>
-        <form class="ui large form">
-            <div class="ui stacked segment">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" id="username" placeholder="Username" #username>
-                    </div>
+<div *ngIf="!isLogged()">
+    <div *ngIf="done "> Incorrect credentials}</div>
+    <div class="ui three column center aligned middle centered grid">
+        <div class="column">
+            <h2 class="ui teal image header">
+                <div class="content">
+                    Log-in to your account
                 </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" id="password" placeholder="Password" #password>
-                    </div>
-                </div>
-                <div class="ui fluid large teal submit button" (click)="login(username.value, password.value)">
-                    Login
-                </div>
-            </div>
+            </h2>
+            <div class="four column centered row">
 
-        </form>
+                <form class="ui small form">
+                    <div class="ui stacked teal segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" id="username" placeholder="Username" #username>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" id="password" placeholder="Password" #password>
+                            </div>
+                        </div>
+                        <div class="ui fluid large teal submit button" (click)="login(username.value, password.value)">
+                            Login
+                        </div>
+                        <br>
+                        <div class="ui fluid large teal submit button" (click)="goRegister()">
+                            Sign up
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-</div>
-</div>
 
-<div *ngIf="logged">
-    Sup {{ getUserName() }}
+<div *ngIf="isLogged()">
+    <h2> Hello {{ getUserName() }} </h2>
     <div class="ui large teal submit button" (click)="logout()">
         Logout
     </div>

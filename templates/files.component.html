@@ -1,11 +1,10 @@
 <div class="ui container">
-  <div class="ui grid">
+  <div class="ui left aligned  grid">
      <div class="three wide column">
-            <div>
+        <div>
+        </div>
 
-
-     </div>
-         <div class="ui vertical menu">
+        <div class="ui vertical menu">
 
             <a class="item" [routerLink]="['/Files/Results']"
 	            [class.active]="router.isRouteActive(router.generate(['/Files/Results']))">
@@ -17,16 +16,15 @@
 			   Files
 			</a>
 
+        </div>
+    </div>
+    
+    <div class="twelve wide stretched column">
+        <div class="ui segment">
+        	<div>
+         		<router-outlet></router-outlet>
+            </div>
          </div>
-     </div>
-     <div class="twelve wide stretched column">
-         <div class="ui segment">
-             	
-             	<div>
-             		<router-outlet></router-outlet>
-                </div>
-             	
-         </div>
-     </div>
+    </div>
  </div>
 </div>

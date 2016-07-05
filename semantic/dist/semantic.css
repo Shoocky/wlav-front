@@ -3037,7 +3037,7 @@ input::selection {
 
 .ui.pink.buttons .button,
 .ui.pink.button {
-  background-color: #E03997;
+  background-color: #B50062;
   color: #FFFFFF;
   text-shadow: none;
   background-image: none;
@@ -7347,7 +7347,7 @@ i.inverted.circular.purple.icon {
 /* Pink */
 
 i.pink.icon {
-  color: #E03997 !important;
+  color:  #B50062 !important;
 }
 
 i.inverted.pink.icon {
@@ -12120,8 +12120,8 @@ a.ui.basic.purple.label:hover {
 
 .ui.pink.labels .label,
 .ui.pink.label {
-  background-color: #E03997 !important;
-  border-color: #E03997 !important;
+  background-color: #B50062 !important;
+  border-color: #B50062 !important;
   color: #FFFFFF !important;
 }
 
@@ -22894,7 +22894,7 @@ Floated Menu / Item
 /* Pink */
 
 .ui.pink.table {
-  border-top: 0.2em solid #E03997;
+  border-top: 0.2em solid #B50062;
 }
 
 .ui.inverted.pink.table {

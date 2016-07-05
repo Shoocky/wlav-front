@@ -1,3 +1,7 @@
+ <div class="ui vertical masthead center aligned segment">
+
+<div class="ui container">
+     
  <div class="ui teal secondary pointing menu">
     <a class="item" [routerLink]="['/Home']"
       [class.active]="router.isRouteActive(router.generate(['/Home']))">
@@ -16,14 +20,19 @@
        [class.active]="router.isRouteActive(router.generate(['/About']))">
        About
     </a>
-    <div class="right menu">
+    <div *ngIf="isLoggedIn()" class="right menu">
 
-     <div *ngIf="isLoggedIn()">
-         Logged in as <b> {{ getUserName() }}</b>
-         <a href (click)="logout()">Log out</a>
-         <hr>
-     </div>
+      
+         <span class="item " > <i class="pink user icon"> </i> {{ getUserName() }} </span>  
+         <span class="item"> <a href (click)="logout()">Log out</a> </span>
+         
+      
+      
     </div>
  </div>
-
+<div clas="ui container">
  <login-router-outlet></login-router-outlet>
+</div>
+
+</div>
+</div>

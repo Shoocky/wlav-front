@@ -1,9 +1,10 @@
-<div *ngIf="done" class="login ui ">
-    <div class="ui middle aligned center aligned grid">
+<div *ngIf="done" >
+    <div class="ui three column center aligned middle centered grid">
         <div class="column">
-            <form class="ui large form">
-                <div class="ui stacked segment">
-                  <div class="field">
+              <div class="four column centered row">
+                <form class="ui medium form">
+                  <div class="ui stacked segment pink">
+                    <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
                             <input type="text"
@@ -40,14 +41,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui fluid teal submit button" (click)="submit(firstName.value, lastName.value, email.value, username.value)">
+                <div class="ui fluid pink submit button" (click)="submit(firstName.value, lastName.value, email.value, username.value)">
                     Save
                 </div>
                 <br/>
-                <div class="ui fluid teal submit button" (click)="changePassword()">
+                <div class="ui fluid pink submit button" (click)="changePassword()">
                     Change Password
                 </div>
             </form>
+          </div>
         </div>
     </div>
 </div>

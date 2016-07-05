@@ -10,9 +10,7 @@ import {EditorComponent} from './editor.component';
 	template:
 	`
 
-	<h1>Codemirror</h1>
-	<editor>
-	</editor>
+	<h1 class="ui teal header">About</h1>
 	
 	`,
 })

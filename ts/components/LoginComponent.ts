@@ -36,7 +36,7 @@ export class LoginComponent{
 
         this.http.post('http://localhost:8000/oauth/v2/token', body , {headers: headers})
         .subscribe(response => {
-                    
+                    this.logged = true; 
                     //cuvanje tokena i informacija o koriscnicima 
                     localStorage.setItem('id_token', response.json().access_token);
                     localStorage.setItem('refresh_token', response.json().refresh_token);
@@ -48,8 +48,9 @@ export class LoginComponent{
                     var d = new Date(Date.now());
                     d.setSeconds(d.getSeconds() + response.json().expires_in);
                     localStorage.setItem('expires_at', d.toString());
-    
+                    
                     this.router.navigate(['/Home']);
+
                   },
                    error => {
                        alert(error.text());
@@ -61,6 +62,16 @@ export class LoginComponent{
     getUserName(){
         return localStorage.getItem('username');
     }
+
+    goRegister(){
+        this.router.navigate(['/Register']);
+    }
+
+    isLogged(){
+        console.log('wtf');
+        return this.userService.isLogged();
+    }
+
     logout(): boolean {
         this.userService.logout();
         this.logged = false;
