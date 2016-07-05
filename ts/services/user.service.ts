@@ -77,6 +77,24 @@ export class UserService{
 		);
 	}
 
+	changePassword(password: string, oldPassword: string) : any {
+		let headers = contentHeaders();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+		let body = 	"password=" + password +
+					"&oldPassword=" + oldPassword;
+		console.log(body);
+		this.http.put(this.baseUrl + '/' + localStorage.getItem('user_id'), body, {headers: headers})
+			.subscribe(	result => {
+				console.log(result.json());
+				return result.json();
+			},
+				error => {
+				console.log(error);
+			}
+		);
+	}
+
 	delete(user: User): any{
 		let headers = contentHeaders();
 		this.http.delete(this.baseUrl + '/' + localStorage.getItem('user_id'), {headers: headers})

@@ -30,7 +30,7 @@ export class EditProfileComponent implements OnInit {
 
 
 	submit(firstName: string, lastName: string, email: string, username: string) {
-		let user = new User(firstName, lastName, email, username);
+		let user = new User(firstName, lastName, email, username, '');
 		this.userService.put(user);
 		this.router.navigate(['Profile']);
 	}

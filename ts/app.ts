@@ -18,6 +18,7 @@ import { FilesComponent } from './components/FilesComponent';
 import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
 import { ChangePasswordComponent } from './components/ChangePasswordComponent';
+import { UsersComponent} from './components/UsersComponent';
 
 
 //directives
@@ -39,6 +40,7 @@ import { LoggedInRouterOutlet } from './directives/logged-in-router-outlet.direc
 	{path: '/files/...',      name:'Files',          component: FilesComponent},
 	{path: '/details/:id',    name:'Details',        component: DetailsComponent},
 	{path: '/changepassword', name:'ChangePassword', component: ChangePasswordComponent},
+	{path: '/users',          name:'Users',          component: UsersComponent},
 
 ])
 export class WlavApp {

@@ -1,0 +1,24 @@
+<div *ngIf="done">
+	<div *ngFor="let user of users">
+		<div class="container">
+<div  class="ui teal card">
+  <div class="image">
+    <img src="../images/profile.png">
+        <a class="ui teal right ribbon label" (click)="submit()">Edit</a>
+  </div>
+  <div class="content">
+    <h1 class="header ui teal">{{user.firstName}} {{user.lastName}}</h1>
+    <div class="meta">
+       {{user.username}}
+    </div>
+  </div>
+  <div class="extra content">
+    <a>
+      <i class="user icon"></i>
+      {{user.email}}
+    </a>
+  </div>
+</div>
+</div>
+	</div>
+</div>
